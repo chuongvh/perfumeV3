@@ -56,5 +56,8 @@ namespace S3Train
         /// <param name="entity"></param>
         void SendMultyEmail(string to, string from, string subject, string body);
 
+
+        string UpFile(HttpPostedFileBase a, string url);
+
     }
 }

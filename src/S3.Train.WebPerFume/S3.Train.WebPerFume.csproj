@@ -231,11 +231,14 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BannerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BrandController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\VendorController.cs" />
     <Compile Include="Areas\Admin\Models\BannerViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\BrandViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductViewModel.cs" />
+    <Compile Include="CommonFunction\ConvertDomainToModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -1001,6 +1004,11 @@
     <Content Include="Areas\Admin\Views\Banner\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Banner\AddOrEditBanner.cshtml" />
     <Content Include="Areas\Admin\Views\Banner\_DeleteBanner.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_ProductList_NameImagePartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\DetailBrand.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\_AddOrEditBrandPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\_DeleteBrandPartial.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

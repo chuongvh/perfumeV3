@@ -11,7 +11,8 @@ namespace S3.Train.WebPerFume
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/Datatables/jquery.datatables.js",
-                        "~/Scripts/Datatables/datatables.boostrap.js"
+                        "~/Scripts/Datatables/datatables.boostrap.js",
+                        "~/Content/ckeditor/ckeditor.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
