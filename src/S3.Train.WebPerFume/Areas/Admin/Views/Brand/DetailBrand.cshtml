@@ -5,67 +5,66 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>DetailBrand</h2>
-
-<div class="card card-body">
-    <h4>BrandViewModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Summary)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Summary)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Logo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Logo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreateDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UpdateDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UpdateDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-
-    </dl>
-    <div>
-        @Html.Partial("_AddOrEditBrandPartial", Model)
-        @Html.Partial("_DeleteBrandPartial", Model)
-    </div>
+<div class="card">
+    <div class="card-body">
+        <div class="h3 card-header">Detail @Model.Name Brand</div>
+        <br />
+        <div class="container">
+            <div class="row row-cols-1 h-100">
+                <div class="col col-lg">
+                    Name: @Model.Name
+                </div>
+            </div>
+            <br />
+            <div class="row row-cols-1 h-50">
+                <div class="col col-lg">
+                    Logo: <img src="~/Content/img/logocarousel/@Model.Logo" class="img-lg img-thumbnail"/>
+                </div>
+            </div>
+            <br />
+            <div class="row row-cols-1 h-50">
+                <div class="col col-lg">
+                    Active: 
+                    @{
+                        if (Model.IsActive)
+                        {
+                            <label class="badge badge-success">On</label>
+                        }
+                        else
+                        {
+                            <label class="badge badge-danger">Off</label>
+                        }
+                    }
+                </div>
+            </div>
+            <br />
+            <div class="row row-cols-1 h-50">
+                <div class="col col-lg">
+                    Create Date: @Model.CreateDate
+                </div>
+            </div>
+            <br />
+            <div class="row row-cols-1 h-50">
+                <div class="col col-lg">
+                    Update Date: @Model.UpdateDate
+                </div>
+            </div>
+            <br />
+            <div class="row row-cols-1 h-50">
+                <div class="col col-lg">
+                    Summary: @Html.Raw(HttpUtility.HtmlDecode(Model.Summary))
+                </div>
+            </div>
+            <br />
+            @Html.Partial("~/Areas/Admin/Views/Product/_ProductSmall_Info.cshtml", Model.Products)
+        </div>
+        <div>
+            @Html.Partial("_AddOrEditBrandPartial", Model)
+            <br />
+            @Html.Partial("_DeleteBrandPartial", Model)
+            <br />
+            @Html.ActionLink("Back To List","Index","Brand", new { @class= "btn btn-gradient-light btn-fw" })
+        </div>
+     </div>
+    
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -55,6 +55,7 @@
                     @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                     <script type="text/javascript">CKEDITOR.replace("Description", { htmlEncodeOutput: true });</script>
+                    <!--Html.Raw(HttpUtility.HtmlDecode(model.Description))-->
                 </div>
             </div>
 

@@ -33,7 +33,13 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
             return View(model);
         }
 
-        public PartialViewResult DetailBrand(Guid id)
+
+        /// <summary>
+        /// Detail Brand
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Detail View</returns>
+        public ActionResult DetailBrand(Guid id)
         {
             var brand = _brandService.GetById(id);
             var model = new BrandViewModel
@@ -47,7 +53,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                 Products = ConvertDomainToModel.GetProduct_SummaryInfo(_productService.GetProductsByBrandId(brand.Id)),
                 UpdateDate = brand.UpdatedDate,
             };
-            return PartialView("~/Areas/Admin/Views/brand/_AddOrEditBrandPartial.cshtml", model);
+            return View(model);
         }
 
         [HttpGet]
@@ -79,12 +85,12 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult AddOrEditBrand(Guid? id, BrandViewModel model, HttpPostedFileBase image)
+        public ActionResult AddOrEditBrand(Guid? id, BrandViewModel model, HttpPostedFileBase logo)
         {
             try
             {
                 bool isNew = !id.HasValue;
-                string localFile = "~/Content/img/logocarousel";
+                string localFile = Server.MapPath("~/Content/img/logocarousel/");
 
                 // isNew = true update UpdatedDate of product
                 // isNew = false get it by id
@@ -95,7 +101,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
 
                 brand.Name = model.Name;
                 brand.Summary = model.Summary;
-                brand.Logo = _brandService.UpFile(image, localFile);
+                brand.Logo = _brandService.UpFile(logo, localFile);
                 brand.IsActive = true;
 
                 if (isNew)
