@@ -4,22 +4,36 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    int stt = 1;
 }
 
-<div class="card card-body display">
-    <div class="card-title">Brands</div>
-    <hr />
-    <div>
-        @Html.Partial("_AddOrEditBrandPartial",new BrandViewModel())
-    </div>
+<script src="~/Content/ckeditor/ckeditor.js"></script>
 
-    @foreach (var brand in Model)
-    {
-        <div class="container">
-            <div class="h4">@brand.Name</div>
-
-            @Html.Partial("_ProductList_NameImagelPartial", brand.Products)
+<div class="card">
+    <div class="card-body">
+        <div class="h2">Brands</div>
+        <div>
+            @Html.Partial("_AddOrEditBrandPartial", new BrandViewModel())
         </div>
-        <div></div>
-    }
+        <hr />
+        @foreach (var brand in Model)
+        {
+            <div class="container">
+                <div class="row row-cols-1 w-75">
+                    <div class="col col-lg">
+                        <div class="h3">    
+                            @stt .  @Html.ActionLink(brand.Name, "DetailBrand", "Brand", new { id = brand.Id }, new { @class = "text-black" })  @{ stt += 1; }
+                        </div>
+                    </div>
+                    <div class="col col-lg">
+                        @Html.Partial("_DeleteBrandPartial", brand)
+                    </div>
+                </div>
+
+                @Html.Partial("~/Areas/Admin/Views/Product/_ProductSmall_Info.cshtml", brand.Products)
+            </div>
+            <div class="h-25"><hr /></div>
+           
+        }
+    </div>
 </div>

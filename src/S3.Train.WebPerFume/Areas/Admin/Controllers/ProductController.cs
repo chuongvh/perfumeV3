@@ -32,6 +32,23 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
             return View(model);
         }
 
+        public ActionResult DetailProduct(Guid id)
+        {
+            var product = _productService.GetById(id);
+            var model = new ProductViewModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Brand = _brandService.GetById(product.Brand_Id),
+                Vendor = _vendorService.GetById(product.Vendor_Id),
+                Description = product.Description,
+                ImagePath = product.ImagePath,
+                CreateDate = product.CreatedDate,
+                IsActive = product.IsActive
+            };
+            return View(model);
+        }
+
         [HttpGet]
         public ActionResult AddOrEditProduct(Guid? id)
         {

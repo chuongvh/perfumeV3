@@ -2,21 +2,26 @@
 
 @{ 
     string title = "";
+    string cssTiltle = "";
     if(Model.Name == null)
     {
         title = "New";
+        cssTiltle = "btn btn-gradient-success btn-fw";
     }
     else
     {
         title = "Update";
+        cssTiltle = "btn btn-gradient-success btn-fw";
     }
 }
+
+<script src="~/Content/ckeditor/ckeditor.js"></script>
 
 @using (Html.BeginForm("AddOrEditBrand","Brand",FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    <button type="button" class="@cssTiltle" data-toggle="modal" data-target="#exampleModal">
         @title
     </button>
 
@@ -51,35 +56,11 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Logo, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            <input type="file" id="gallery-photo-add" name="image" class="btn">
+                            <input type="file" id="gallery-photo-add" name="logo" class="btn">
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.CreateDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.CreateDate, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.CreateDate, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.UpdateDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.UpdateDate, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.UpdateDate, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            <div class="checkbox">
-                                @Html.EditorFor(model => model.IsActive)
-                                @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
+                  
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-gradient-secondary btn-fw" data-dismiss="modal">No</button>
