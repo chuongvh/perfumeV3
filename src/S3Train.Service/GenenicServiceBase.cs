@@ -217,6 +217,20 @@ namespace S3Train
             }
         }
 
-        
+        public string UpFile(HttpPostedFileBase a, string url)
+        {
+            string fileName = "";
+            if (a != null && a.ContentLength > 0)
+            {
+                fileName = Path.GetFileName(a.FileName).ToString();
+                string path = Path.Combine(url, fileName);
+                a.SaveAs(path);
+                return fileName;
+            }
+            else
+            {
+                return fileName;
+            }
+        }
     }
 }
