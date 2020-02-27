@@ -4,7 +4,7 @@
 <head runat="server">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Spa Admin</title>
+    <title>PerfumeShop</title>
     <!-- plugins:css -->
     <link href="~/Scripts/vendors/iconfonts/mdi/css/materialdesignicons.min.css" rel="stylesheet" />
     <link href="~/Scripts/vendors/css/vendor.bundle.base.css" rel="stylesheet" />
@@ -210,13 +210,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="@Url.Action("KhoaHoc","Home")" class="nav-link">
-                                <span class="menu-title">Banner</span>
+                            
+                                
+                                <span class="menu-title">@Html.ActionLink("Banner", "Index", "Banner")</span>
                                 <i class="mdi mdi-source-commit-start menu-icon"></i>
-                            </a>
+                            
                         </li>
                         <li class="nav-item">
-                            <a href="@Url.Action("TuVung","Home")" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <span class="menu-title">Brand</span>
                                 <i class="mdi mdi-book menu-icon"></i>
                             </a>

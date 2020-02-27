@@ -8,6 +8,7 @@ namespace S3Train.Domain
     {
         [ForeignKey("Vendor")]
         public Guid Vendor_Id { get; set; }
+ 
         [ForeignKey("Brand")]
         public Guid  Brand_Id { get; set; }
         public string Name { get; set; }
@@ -18,5 +19,6 @@ namespace S3Train.Domain
         public virtual Brand Brand { get; set; }
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<ProductVariation> ProductVariations { get; set; }
+        
     }
 }

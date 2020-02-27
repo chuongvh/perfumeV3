@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace S3Train.Contract
 {
-    interface IShoppingCartService : IGenenicServiceBase<ShoppingCart>
+    public interface IShoppingCartService : IGenenicServiceBase<ShoppingCart>
     {
     }
 }

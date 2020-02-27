@@ -1,0 +1,91 @@
+﻿@using S3.Train.WebPerFume.Areas.Admin.Models;
+@model IEnumerable<OrderViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+
+    int stt = 1;
+}
+
+<div class="card card-body display">
+    <h2 class="card-text">Orders</h2>
+    <div>
+        @Html.ActionLink("New", "AddOrder", "Order", new { @class = "btn btn-gradient-success" })
+    </div>
+    <hr />
+    <table id="myTable" class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ShoppingCart_Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeliveryName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeliveryAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeliveryPhone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderDate)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </th>
+                <th>Functions</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tbody>
+                <tr>
+                    <td>
+                        @stt
+                    </td>
+                  
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateDate)
+                    </td>
+                    <td>
+                        @{
+                            if (item.IsActive)
+                            {
+                                <label class="badge badge-success">On</label>
+                            }
+                            else
+                            {
+                                <label class="badge badge-danger">Off</label>
+                            }
+                            stt = stt + 1;
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "AddOrder", "Order", new { id = item.Id }, new { @class = "btn btn-gradient-info btn-fw" })
+                        <br />
+                        @Html.Partial("_DeleteOrder", item)
+                    </td>
+                </tr>
+            </tbody>
+        }
+
+    </table>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}

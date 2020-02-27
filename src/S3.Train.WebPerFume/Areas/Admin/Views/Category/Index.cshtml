@@ -1,0 +1,39 @@
+﻿@*@using S3.Train.WebPerFume.Areas.Admin.Models
+@model IEnumerable<CategoryViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    int stt = 1;
+}
+
+<script src="~/Content/ckeditor/ckeditor.js"></script>
+
+<div class="card">
+    <div class="card-body">
+        <div class="h2">Categories</div>
+        <div>
+            @Html.Partial("_AddOrEditCategoryPartial", new CategoryViewModel())
+        </div>
+        <hr />
+        @foreach (var category in Model)
+        {
+            <div class="container">
+                <div class="row row-cols-1 w-75">
+                    <div class="col col-lg">
+                        <div class="h3">
+                            @stt .  @Html.ActionLink(category.Name, "DetailCategory", "Category", new { id = category.Id }, new { @class = "text-black" })  @{ stt += 1; }
+                        </div>
+                    </div>
+                    <div class="col col-lg">
+                        @Html.Partial("_DeleteBrandPartial", category)
+                    </div>
+                </div>
+
+                @Html.Partial("~/Areas/Admin/Views/Product/_ProductSmall_Info.cshtml", category.Products)
+            </div>
+            <div class="h-25"><hr /></div>
+
+        }
+    </div>
+</div>*@

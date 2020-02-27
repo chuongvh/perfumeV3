@@ -15,6 +15,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
         private readonly IProductService _productService;
         private readonly IBrandService _brandService;
         private readonly IVendorService _vendorService;
+       
 
         public ProductController() { }
 
@@ -23,6 +24,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
             _productService = productService;
             _brandService = brandService;
             _vendorService = vendorService;
+ 
         }
 
         // GET: Admin/Product
@@ -41,6 +43,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                 Name = product.Name,
                 Brand = _brandService.GetById(product.Brand_Id),
                 Vendor = _vendorService.GetById(product.Vendor_Id),
+               
                 Description = product.Description,
                 ImagePath = product.ImagePath,
                 CreateDate = product.CreatedDate,
@@ -184,6 +187,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                 Name = x.Name,
                 Brand = _brandService.GetById(x.Brand_Id),
                 Vendor = _vendorService.GetById(x.Vendor_Id),
+                
                 Description = x.Description,
                 ImagePath = x.ImagePath,
                 CreateDate = x.CreatedDate,

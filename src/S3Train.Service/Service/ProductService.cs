@@ -16,5 +16,10 @@ namespace S3Train.Service
         {
             return this.EntityDbSet.Where(x => x.Brand_Id == brand_Id && x.IsActive == true).ToList();
         }
+        public IList<Product> GetProductsByVendorId(Guid vendor_Id)
+        {
+            return this.EntityDbSet.Where(x => x.Vendor_Id == vendor_Id && x.IsActive == true).ToList();
+        }
+        
     }
 }

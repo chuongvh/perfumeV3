@@ -232,12 +232,17 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BannerController.cs" />
     <Compile Include="Areas\Admin\Controllers\BrandController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\VendorController.cs" />
     <Compile Include="Areas\Admin\Models\BannerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\BrandViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\CategoryViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\OrderViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\VendorViewModel.cs" />
     <Compile Include="CommonFunction\ConvertDomainToModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1009,6 +1014,20 @@
     <Content Include="Areas\Admin\Views\Brand\DetailBrand.cshtml" />
     <Content Include="Areas\Admin\Views\Brand\_AddOrEditBrandPartial.cshtml" />
     <Content Include="Areas\Admin\Views\Brand\_DeleteBrandPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Vendor\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Vendor\_AddOrEditVendorPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Vendor\_DeleteVendorPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Vendor\DetailVendor.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\DetailCategory.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\_DeleteCategoryParitial.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\_AddOrEditCategoryParitial.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\DetailOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\_DeleteOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\AddOrderParital.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -1192,7 +1211,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Home\" />
-    <Folder Include="Areas\Admin\Views\Vendor\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

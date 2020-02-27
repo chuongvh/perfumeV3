@@ -1,0 +1,39 @@
+﻿@using S3.Train.WebPerFume.Areas.Admin.Models
+@model IEnumerable<VendorViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    int stt = 1;
+}
+
+<script src="~/Content/ckeditor/ckeditor.js"></script>
+
+<div class="card">
+    <div class="card-body">
+        <div class="h2">Vendors</div>
+        <div>
+            @Html.Partial("_AddOrEditVendorPartial", new VendorViewModel())
+        </div>
+        <hr />
+        @foreach (var vendor in Model)
+        {
+            <div class="container">
+                <div class="row row-cols-1 w-75">
+                    <div class="col col-lg">
+                        <div class="h3">
+                            @stt .  @Html.ActionLink(vendor.Name, "DetailVendor", "Vendor", new { id = vendor.Id }, new { @class = "text-black" })  @{ stt += 1; }
+                        </div>
+                    </div>
+                    <div class="col col-lg">
+                        @Html.Partial("_DeleteVendorPartial", vendor)
+                    </div>
+                </div>
+
+                @Html.Partial("~/Areas/Admin/Views/Product/_ProductSmall_Info.cshtml", vendor.Products)
+            </div>
+            <div class="h-25"><hr /></div>
+
+        }
+    </div>
+</div>

@@ -1,0 +1,65 @@
+﻿@*@model S3.Train.WebPerFume.Areas.Admin.Models.CategoryViewModel
+
+@{
+    ViewBag.Title = "DetailCategory";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="h3 card-header">Detail @Model.Name Category</div>
+        <br />
+        <div class="container">
+            <div class="row row-cols-1 h-100">
+                <div class="col col-lg">
+                    Name: @Model.Name
+                </div>
+            </div>
+            <br />
+           
+            <div class="row row-cols-1 h-50">
+                <div class="col col-lg">
+                    Active:
+                    @{
+                        if (Model.IsActive)
+                        {
+                            <label class="badge badge-success">On</label>
+                        }
+                        else
+                        {
+                            <label class="badge badge-danger">Off</label>
+                        }
+                    }
+                </div>
+            </div>
+            <br />
+            <div class="row row-cols-1 h-50">
+                <div class="col col-lg">
+                    Create Date: @Model.CreateDate
+                </div>
+            </div>
+            <br />
+            <div class="row row-cols-1 h-50">
+                <div class="col col-lg">
+                    Update Date: @Model.UpdateDate
+                </div>
+            </div>
+            <br />
+            <div class="row row-cols-1 h-50">
+                <div class="col col-lg">
+                    Summary: @Html.Raw(HttpUtility.HtmlDecode(Model.Summary))
+                </div>
+            </div>
+            <br />
+            @Html.Partial("~/Areas/Admin/Views/Product/_ProductSmall_Info.cshtml", Model.Products)
+        </div>
+        <div>
+            @Html.Partial("_AddOrEditCategoryPartial", Model)
+            <br />
+            @Html.Partial("_DeleteCategoryPartial", Model)
+            <br />
+            @Html.ActionLink("Back To List", "Index", "Category", new { @class = "btn btn-gradient-light btn-fw" })
+        </div>
+    </div>
+
+</div>*@
