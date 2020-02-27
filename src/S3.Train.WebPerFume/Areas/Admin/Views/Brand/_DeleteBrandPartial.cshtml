@@ -1,19 +1,20 @@
 ﻿@using S3.Train.WebPerFume.Areas.Admin.Models
 @model BrandViewModel
 
-@using (Html.BeginForm("DeleteProduct", "Product", FormMethod.Post))
+@using (Html.BeginForm("DeleteBrand", "Brand", FormMethod.Post))
 {
     @Html.HiddenFor(m => m.Id)
-    <button type="button" class="btn btn-gradient-danger btn-fw" data-toggle="modal" data-target="#exampleModalDelete">
+    <button type="button" class="btn btn-gradient-danger btn-fw" data-toggle="modal" data-target="#exampleModalDelete@(Model.Id)">
         Delete
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModalDelete@(Model.Id)" tabindex="-1" role="dialog" 
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel@(Model.Id)">Title</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -22,8 +23,8 @@
                     Are You Sure Delete @Model.Name?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-gradient-secondary btn-fw" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-gradient-success btn-fw">Create</button>
+                    <button type="button" class="btn btn-gradient-secondary btn-fw" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-gradient-success btn-fw">Yes</button>
                 </div>
             </div>
         </div>
