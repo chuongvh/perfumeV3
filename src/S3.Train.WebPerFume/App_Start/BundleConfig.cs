@@ -10,9 +10,10 @@ namespace S3.Train.WebPerFume
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/Datatables/jquery.datatables.js",
-                        "~/Scripts/Datatables/datatables.boostrap.js",
-                        "~/Content/ckeditor/ckeditor.js"
+                        "~/scripts/datatables/jquery.datatables.js",
+                        "~/scripts/datatables/datatables.boostrap.js",
+                        "~/scripts/bootbox.js",
+                        "~/Scripts/respond.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -28,7 +29,8 @@ namespace S3.Train.WebPerFume
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/Datatables/css/datatables.bootstrap.css",
+                      "~/content/dataTables/css/dataTables.bootstrap.css",
+                      "~/Content/ckeditor/ckeditor.js",
                       "~/Content/site.css"));
         }
     }
