@@ -39,6 +39,13 @@ namespace S3Train
         void Update(T entity);
 
         /// <summary>
+        /// Change status
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="status"></param>
+        void ChangeStatus(T entity, bool status);
+
+        /// <summary>
         /// Delete Item In entity
         /// </summary>
         /// <param name="entity"></param>

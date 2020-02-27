@@ -1,4 +1,5 @@
 ﻿using S3.Train.WebPerFume.Areas.Admin.Models;
+using S3.Train.WebPerFume.CommonFunction;
 using S3Train.Contract;
 using S3Train.Domain;
 using System;
@@ -15,16 +16,18 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
         private readonly IProductService _productService;
         private readonly IBrandService _brandService;
         private readonly IVendorService _vendorService;
+        private readonly IProductVariationService _productVariationService;
        
 
         public ProductController() { }
 
-        public ProductController(IProductService productService, IBrandService brandService, IVendorService vendorService)
+        public ProductController(IProductService productService, IBrandService brandService, 
+            IVendorService vendorService, IProductVariationService productVariationService)
         {
             _productService = productService;
             _brandService = brandService;
             _vendorService = vendorService;
- 
+            _productVariationService = productVariationService;
         }
 
         // GET: Admin/Product
@@ -59,6 +62,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
 
             model.DropDownBrand = DropDownList_Brand();
             model.DropDownVendor = DropDownList_Vendor();
+            model.Volumes = ListVolume.GetVolumeCheckBoxes();
 
             if (id.HasValue)
             {
@@ -90,7 +94,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
             try
             {
                 bool isNew = !id.HasValue;
-                string localFile = "~/Content/img/product-men";
+                string localFile = Server.MapPath("~/Content/img/product-men");
 
                 // isNew = true update UpdatedDate of product
                 // isNew = false get it by id
@@ -103,7 +107,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                 product.Brand_Id = model.Brand_Id;
                 product.Vendor_Id = model.Vendor_Id;
                 product.Description = model.Description;
-                product.ImagePath = UpFile(image, localFile);
+                product.ImagePath = _productService.UpFile(image, localFile);
                 product.IsActive = true;
 
                 if (isNew)
@@ -111,6 +115,13 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                     product.CreatedDate = DateTime.Now;
                     product.Id = Guid.NewGuid();
                     _productService.Insert(product);
+
+                    // Add ProductVariation
+                    foreach(var proVa in model.Volumes)
+                    {
+                        if (proVa.Checked)
+                            AddProductVariation(product.Id, proVa.Volume);
+                    }
                 }
                 else
                 {
@@ -195,39 +206,18 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
             }).ToList();
         }
 
-        public IList<ProductViewModel> GetProduct_SummaryInfo(IList<Product> products)
+        public void AddProductVariation(Guid product_Id, string volume)
         {
-            return products.Select(x => new ProductViewModel
+            var item = new ProductVariation
             {
-                Id = x.Id,
-                Name = x.Name,
-                ImagePath = x.ImagePath,
-                CreateDate = x.CreatedDate,
-                IsActive = x.IsActive
-            }).ToList();
-        }
+                Id = Guid.NewGuid(),
+                Product_Id = product_Id,
+                Volume = volume,
+                CreatedDate = DateTime.Now,
+                IsActive = true
+            };
 
-
-        /// <summary>
-        /// Upload file and save in folder
-        /// </summary>
-        /// <param name="a">choose file</param>
-        /// <param name="url">local save file </param>
-        /// <returns>file name</returns>
-        public string UpFile(HttpPostedFileBase a, string url)
-        {
-            string fileName = "";
-            if (a != null && a.ContentLength > 0)
-            {
-                fileName = Path.GetFileName(a.FileName).ToString();
-                string path = Path.Combine(Server.MapPath(url), fileName);
-                a.SaveAs(path);
-                return fileName;
-            }
-            else
-            {
-                return fileName;
-            }
+            _productVariationService.Insert(item);
         }
     }
 }
