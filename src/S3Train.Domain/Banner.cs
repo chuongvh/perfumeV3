@@ -10,5 +10,7 @@ namespace S3Train.Domain
     {
         public string Image { get; set; }
         public string Link { get; set; }
+
+        public BannerType AdType { get; set; }
     }
 }
