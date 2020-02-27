@@ -11,10 +11,10 @@
 <div class="card card-body display">
     <h2 class="card-text">Products</h2>
     <div>
-        @Html.ActionLink("New", "AddOrEditProduct", "Product", new { @class = "btn btn-gradient-success" })
+        @Html.ActionLink("New", "AddOrEditProduct", "Product", new { @class = "btn btn-gradient-success btn-fw" })
     </div>
     <hr />
-    <table id="myTable" class="table table-hover">
+    <table id="myTable" class="table table-hover display">
         <thead>
             <tr>
                 <th>
@@ -46,29 +46,29 @@
         {
             <tbody>
                 <tr>
-                    <td>
+                    <td class="align-middle">
                         @stt
                     </td>
-                    <td>
+                    <td class="align-middle">
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
 
-                    <td class="py-1">
+                    <td class="py-1 align-middle">
                         <a href="#" class="py-1">
                             <img src="~/Content/img/product-men/@item.ImagePath" alt="@item.Name"/>
                         </a>
                     </td>
 
-                    <td>
+                    <td class="align-middle">
                         @Html.DisplayFor(modelItem => item.Brand.Name)
                     </td>
-                    <td>
+                    <td class="align-middle">
                         @Html.DisplayFor(modelItem => item.Vendor.Name)
                     </td>
-                    <td>
+                    <td class="align-middle">
                         @Html.DisplayFor(modelItem => item.CreateDate)
                     </td>
-                    <td>
+                    <td class="align-middle">
                         @{
                             if (item.IsActive)
                             {
@@ -81,7 +81,7 @@
                             stt = stt + 1;
                         }
                     </td>
-                    <td>
+                    <td class="align-middle">
                         @Html.ActionLink("Edit", "AddOrEditProduct", "Product", new { id = item.Id }, new { @class = "btn btn-gradient-info btn-fw" })
                         <br />
                         @Html.Partial("_DeleteProduct", item)
@@ -96,8 +96,8 @@
 @section scripts
 {
     <script>
-        $(document).ready(function () {
+       /* $(document).ready(function () {
             $('#myTable').DataTable();
-        });
+        });*/
     </script>
     }
