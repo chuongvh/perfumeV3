@@ -24,6 +24,8 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
         {
             _productService = productService;
             _brandService = brandService;
+            _brandService = brandService;
+            _productService = productService;
         }
 
         // GET: Admin/Brand
