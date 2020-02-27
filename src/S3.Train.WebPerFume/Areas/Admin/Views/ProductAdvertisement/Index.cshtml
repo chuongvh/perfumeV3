@@ -1,21 +1,33 @@
 ﻿@using S3.Train.WebPerFume.Areas.Admin.Models;
-@model IEnumerable<BannerViewModel>
+@model IEnumerable<ProductAdvertisementViewModel>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <div class="card card-body display">
-    <h2 class="card-text">Banners</h2>
+    <h2 class="card-text">ProductAdvertisements</h2>
     <div>
-        @Html.ActionLink("New", "AddOrEditBanner", "Banner", new { @class = "btn btn-gradient-success" })
+        @Html.ActionLink("New", "AddOrEditProductAdvertisement", "ProductAdvertisement", new { @class = "btn btn-gradient-success" })
     </div>
     <hr />
     <table id="myTable" class="table table-hover">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Image)
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EventUrl)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EventUrlCaption)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ImagePath)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.CreateDate)
@@ -31,7 +43,7 @@
             <tbody>
                 <tr>
                     <td class="py-1">
-                        <img src="~/Content/img/banner/@item.Image" class="img-" alt="@item.Link" />
+                        <img src="~/Content/img/banner/@item.ImagePath" class="img-" alt="" />
                     </td>
                     <td>
                         @item.CreateDate
@@ -60,8 +72,8 @@
                         }
                     </td>
                     <td>
-                        @Html.Partial("_DeleteBanner", item)
-                        @Html.ActionLink("Edit", "AddOrEditBanner", "Banner", new { @class = "btn btn-gradient-success" }, new { id = item.Id })
+                        @Html.Partial("_DeleteProductAdvertisement", item)
+                        @Html.ActionLink("Edit", "AddOrEditProductAdvertisement", "ProductAdvertisement", new { @class = "btn btn-gradient-success" }, new { id = item.Id })
                     </td>
                 </tr>
             </tbody>

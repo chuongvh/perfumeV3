@@ -3,11 +3,19 @@
     public enum ProductAdvertisementType
     {
         SliderBanner,
-        MidSquareBanner,
-        LgSquareBanner,
+        WomenSquareBanner,
+        MenSquareBanner,
+        UnisexSquareBanner,
         MidVertRectangleBanner,
         LgVertRectangleBanner,
         MidHorRectangleBanner,
         LgHorRectangleBanner
+    }
+
+    public enum BannerType
+    {
+       WomenBanner,
+       MenBanner,
+       MainBanner
     }
 }

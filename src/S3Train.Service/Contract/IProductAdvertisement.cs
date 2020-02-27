@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace S3Train.Contract
 {
-    interface IProductAdvertisement : IGenenicServiceBase<ProductAdvertisement>
+    public interface IProductAdvertisement : IGenenicServiceBase<ProductAdvertisement>
     {
     }
 }

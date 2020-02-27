@@ -24,7 +24,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
           
         }
 
-        // GET: Admin/Product
+      
         public ActionResult Index()
         {
             var model = GetBanners(_bannerService.SelectAll());
@@ -65,7 +65,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
             try
             {
                 bool isNew = !id.HasValue;
-                string localFile = "~/Content/img/product-men";
+                string localFile = "~/Content/img/banner";
 
                 // isNew = true update UpdatedDate of product
                 // isNew = false get it by id
@@ -134,7 +134,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
             {
                 Id = x.Id,
                 Link = x.Link,
-
+                
                 Image = x.Image,
                 CreateDate = x.CreatedDate,
                 IsActive = x.IsActive
