@@ -235,12 +235,14 @@
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductAdvertisementController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\VendorController.cs" />
     <Compile Include="Areas\Admin\Models\BannerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\BrandViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CategoryViewModel.cs" />
     <Compile Include="Areas\Admin\Models\OrderViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\ProductAdvertisementViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductViewModel.cs" />
     <Compile Include="Areas\Admin\Models\VendorViewModel.cs" />
     <Compile Include="CommonFunction\ConvertDomainToModel.cs" />
@@ -257,6 +259,10 @@
     <Compile Include="Migrations\202002230230378_AddImagePathInProduct.cs" />
     <Compile Include="Migrations\202002230230378_AddImagePathInProduct.designer.cs">
       <DependentUpon>202002230230378_AddImagePathInProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002270644094_addAdTypeInBanner.cs" />
+    <Compile Include="Migrations\202002270644094_addAdTypeInBanner.designer.cs">
+      <DependentUpon>202002270644094_addAdTypeInBanner.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -768,11 +774,60 @@
     <Content Include="Content\img\icon\icon-1.png" />
     <Content Include="Content\img\icon\icon-2.png" />
     <Content Include="Content\img\icon\icon-3.png" />
+    <Content Include="Content\img\logoBrand\logo-chanel.jpg" />
+    <Content Include="Content\img\logoBrand\logoburrerry.png" />
+    <Content Include="Content\img\logoBrand\logocalvinklein.png" />
+    <Content Include="Content\img\logoBrand\logoChristianDior.jpg" />
+    <Content Include="Content\img\logoBrand\logogucci.jpg" />
+    <Content Include="Content\img\logoBrand\logohermes.jpg" />
+    <Content Include="Content\img\logoBrand\logoSaint Laurent.jpg" />
     <Content Include="Content\img\logocarousel\logo-1.png" />
     <Content Include="Content\img\logocarousel\logo-2.png" />
     <Content Include="Content\img\logocarousel\logo-3.png" />
     <Content Include="Content\img\logocarousel\logo-4.png" />
     <Content Include="Content\img\logocarousel\logo-5.png" />
+    <Content Include="Content\img\p-burberry\BMW EDT150.jpg" />
+    <Content Include="Content\img\p-burberry\burberry.jpg" />
+    <Content Include="Content\img\p-burberry\icon.jpg" />
+    <Content Include="Content\img\p-burberry\mr.bur.jpg" />
+    <Content Include="Content\img\p-burberry\mybur.jpg" />
+    <Content Include="Content\img\p-burberry\touch100ml.jpg" />
+    <Content Include="Content\img\p-carven\Carven Pour Homme.jpg" />
+    <Content Include="Content\img\p-carven\Carven-Pour-Homme-Fragrance.png" />
+    <Content Include="Content\img\p-carven\carven_pour_homme_1.jpg" />
+    <Content Include="Content\img\p-chanel\03bcd33d1e-600x550.jpeg" />
+    <Content Include="Content\img\p-chanel\babrielle1.jpg" />
+    <Content Include="Content\img\p-chanel\babrielle2.jpg" />
+    <Content Include="Content\img\p-chanel\babrielle3.jpg" />
+    <Content Include="Content\img\p-chanel\chanel.jpeg" />
+    <Content Include="Content\img\p-chanel\coco nỏi.jpg" />
+    <Content Include="Content\img\p-chanel\cocomademoiselle.jpg" />
+    <Content Include="Content\img\p-chanel\coconoir.jpg" />
+    <Content Include="Content\img\p-chanel\gasrielle.jpg" />
+    <Content Include="Content\img\p-chanel\N%275chanel.jpg" />
+    <Content Include="Content\img\p-chanel\unnamed.jpg" />
+    <Content Include="Content\img\p-dior\b-jadore.PNG" />
+    <Content Include="Content\img\p-dior\combo.jpg" />
+    <Content Include="Content\img\p-dior\diorAddict.jpg" />
+    <Content Include="Content\img\p-dior\EDP 100ml.jpg" />
+    <Content Include="Content\img\p-dior\forever.jpg" />
+    <Content Include="Content\img\p-dior\hypnotic poison.PNG" />
+    <Content Include="Content\img\p-dior\sauvage EDT.jpg" />
+    <Content Include="Content\img\p-gucci\guccibloom.jpg" />
+    <Content Include="Content\img\p-gucci\guilty.jpg" />
+    <Content Include="Content\img\p-gucci\guilty1.jpg" />
+    <Content Include="Content\img\p-lelabo\another13.jpg" />
+    <Content Include="Content\img\p-lelabo\another13_1.jpg" />
+    <Content Include="Content\img\p-lelabo\another13_2.jpg" />
+    <Content Include="Content\img\p-lelabo\le-labo-santal-33.1.jpg" />
+    <Content Include="Content\img\p-lelabo\le-labo-santal-33.2.jpg" />
+    <Content Include="Content\img\p-lelabo\Le-Labo-Santal-33.jpg" />
+    <Content Include="Content\img\p-tomford\blackorchid.jpg" />
+    <Content Include="Content\img\p-tomford\jasminrouge.jpg" />
+    <Content Include="Content\img\p-tomford\velvet orchid100.jpg" />
+    <Content Include="Content\img\p-tomford\whitesuede50.jpg" />
+    <Content Include="Content\img\p-yvessintlaurent\124ml.jpg" />
+    <Content Include="Content\img\p-yvessintlaurent\splendiowood.jpg" />
     <Content Include="Content\img\product-girls\girl-acqua.PNG" />
     <Content Include="Content\img\product-girls\girl-carven.PNG" />
     <Content Include="Content\img\product-girls\girl-chloe.PNG" />
@@ -1030,6 +1085,9 @@
     <Content Include="Areas\Admin\Views\Order\DetailOrder.cshtml" />
     <Content Include="Areas\Admin\Views\Order\_DeleteOrder.cshtml" />
     <Content Include="Areas\Admin\Views\Order\AddOrderParital.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductAdvertisement\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductAdvertisement\AddOrEditProductAdvertisement.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductAdvertisement\_DeleteProductAdvertisement.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -1208,6 +1266,7 @@
     <Content Include="Views\Shared\EditorTemplate\FormControlPassword.cshtml" />
     <Content Include="Views\Shared\EditorTemplate\DropDownList.cshtml" />
     <Content Include="Areas\Admin\Views\Product\_DeleteProduct.cshtml" />
+    <Content Include="Views\Home\Shop.cshtml" />
     <None Include="Web.LocalConnectStrings.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1243,6 +1302,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002230230378_AddImagePathInProduct.resx">
       <DependentUpon>202002230230378_AddImagePathInProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002270644094_addAdTypeInBanner.resx">
+      <DependentUpon>202002270644094_addAdTypeInBanner.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

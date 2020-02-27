@@ -37,5 +37,7 @@ namespace S3.Train.WebPerFume.Controllers
         }
         public ActionResult Checkout()
         { return View(); }
+        public ActionResult Shop()
+        { return View(); }
     }
 }
