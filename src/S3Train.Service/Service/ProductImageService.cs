@@ -13,5 +13,10 @@ namespace S3Train.Service
         public ProductImageService(ApplicationDbContext dbContext) : base(dbContext)
         {
         }
+
+        public ProductImage GetProductImage(Guid proVa)
+        {
+            return this.EntityDbSet.FirstOrDefault(x => x.ProductVariation_Id == proVa);
+        }
     }
 }

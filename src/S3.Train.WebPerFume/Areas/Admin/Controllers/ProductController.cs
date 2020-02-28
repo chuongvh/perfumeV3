@@ -33,7 +33,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
         // GET: Admin/Product
         public ActionResult Index()
         {
-            var model = GetProducts(_productService.SelectAll());
+            var model = GetProducts(_productService.SelectAll().OrderBy(x => x.Name).ToList());
             return View(model);
         }
 
@@ -60,9 +60,9 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
         {
             ProductViewModel model = new ProductViewModel();
 
-            model.DropDownBrand = DropDownList_Brand();
-            model.DropDownVendor = DropDownList_Vendor();
-            model.Volumes = ListVolume.GetVolumeCheckBoxes();
+            model.DropDownBrand = DropDownListDomain.DropDownList_Brand(_brandService.SelectAll());
+            model.DropDownVendor = DropDownListDomain.DropDownList_Vendor(_vendorService.SelectAll());
+            model.Volumes = DropDownListDomain.GetVolumeCheckBoxes();
 
             if (id.HasValue)
             {
@@ -116,7 +116,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                     product.Id = Guid.NewGuid();
                     _productService.Insert(product);
 
-                    // Add ProductVariation
+                    // Add ProductVariation if checked = true
                     foreach(var proVa in model.Volumes)
                     {
                         if (proVa.Checked)
@@ -156,34 +156,6 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        /// <summary>
-        /// Drop Down List Brand
-        /// </summary>
-        /// <returns></returns>
-        public List<SelectListItem> DropDownList_Brand()
-        {
-            List<SelectListItem> items = new List<SelectListItem>();
-            foreach (var item in _brandService.SelectAll())
-            {
-                items.Add(new SelectListItem { Text = item.Name, Value = item.Id.ToString() });
-            }
-            return items;
-        }
-
-        /// <summary>
-        /// Drop Down List Vendor
-        /// </summary>
-        /// <returns></returns>
-        public List<SelectListItem> DropDownList_Vendor()
-        {
-            List<SelectListItem> items = new List<SelectListItem>();
-            foreach (var item in _vendorService.SelectAll())
-            {
-                items.Add(new SelectListItem { Text = item.Name, Value = item.Id.ToString() });
-            }
-            return items;
-        }
-
 
         /// <summary>
         /// Convert List Product to List ProductViewModel All Properties
@@ -198,7 +170,6 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                 Name = x.Name,
                 Brand = _brandService.GetById(x.Brand_Id),
                 Vendor = _vendorService.GetById(x.Vendor_Id),
-                
                 Description = x.Description,
                 ImagePath = x.ImagePath,
                 CreateDate = x.CreatedDate,
@@ -206,6 +177,11 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
             }).ToList();
         }
 
+        /// <summary>
+        /// Add Product Variation With product Id and volume
+        /// </summary>
+        /// <param name="product_Id">Product Id</param>
+        /// <param name="volume">Volume of product variation</param>
         public void AddProductVariation(Guid product_Id, string volume)
         {
             var item = new ProductVariation
@@ -213,6 +189,9 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                 Id = Guid.NewGuid(),
                 Product_Id = product_Id,
                 Volume = volume,
+                Price = 0,
+                SKU = "Empty",
+                StockQuantity = 0,
                 CreatedDate = DateTime.Now,
                 IsActive = true
             };

@@ -72,6 +72,7 @@ namespace S3Train.Domain
             modelBuilder.Entity<ProductVariation>().Property(x => x.Price).IsRequired();
             modelBuilder.Entity<ProductVariation>().Property(p => p.DiscountPrice).IsRequired();
             modelBuilder.Entity<ProductVariation>().HasMany(p => p.ProductImage).WithRequired(s => s.ProductVariation);
+            modelBuilder.Entity<ProductVariation>().HasMany(p => p.ShoppingCartDetails).WithRequired(s => s.ProductVariation);
 
             modelBuilder.Entity<ProductImage>().ToTable("ProductImage");
             modelBuilder.Entity<ProductImage>().Property(x => x.ImagePath).HasMaxLength(100).IsRequired();
@@ -89,7 +90,6 @@ namespace S3Train.Domain
 
             modelBuilder.Entity<ShoppingCartDetail>().ToTable("ShoppingCartDetail");
             modelBuilder.Entity<ShoppingCartDetail>().Property(x => x.Quantity).IsRequired();
-            modelBuilder.Entity<ShoppingCartDetail>().HasOptional(x => x.ProductVariations).WithRequired(a => a.ShoppingCartDetails);
 
             modelBuilder.Entity<Order>().ToTable("Order");
             modelBuilder.Entity<Order>().Property(x => x.DeliveryAddress).HasMaxLength(60).IsRequired();

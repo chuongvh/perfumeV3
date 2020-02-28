@@ -237,17 +237,18 @@
     <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductAdvertisementController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProVarationController.cs" />
     <Compile Include="Areas\Admin\Controllers\VendorController.cs" />
     <Compile Include="Areas\Admin\Models\BannerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\BrandViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CategoryViewModel.cs" />
     <Compile Include="Areas\Admin\Models\OrderViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductAdvertisementViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\ProductVariationViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\ProVarationViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductViewModel.cs" />
     <Compile Include="Areas\Admin\Models\VendorViewModel.cs" />
     <Compile Include="CommonFunction\ConvertDomainToModel.cs" />
-    <Compile Include="CommonFunction\ListVolume.cs" />
+    <Compile Include="CommonFunction\DropDownListDomain.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -265,6 +266,10 @@
     <Compile Include="Migrations\202002270644094_addAdTypeInBanner.cs" />
     <Compile Include="Migrations\202002270644094_addAdTypeInBanner.designer.cs">
       <DependentUpon>202002270644094_addAdTypeInBanner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002280207338_ChangeFK_ProductVariationVsShoppingCartDetail.cs" />
+    <Compile Include="Migrations\202002280207338_ChangeFK_ProductVariationVsShoppingCartDetail.designer.cs">
+      <DependentUpon>202002280207338_ChangeFK_ProductVariationVsShoppingCartDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1090,6 +1095,8 @@
     <Content Include="Areas\Admin\Views\ProductAdvertisement\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ProductAdvertisement\AddOrEditProductAdvertisement.cshtml" />
     <Content Include="Areas\Admin\Views\ProductAdvertisement\_DeleteProductAdvertisement.cshtml" />
+    <Content Include="Areas\Admin\Views\ProVaration\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProVaration\AddOrEditProductVariation.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -1307,6 +1314,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002270644094_addAdTypeInBanner.resx">
       <DependentUpon>202002270644094_addAdTypeInBanner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002280207338_ChangeFK_ProductVariationVsShoppingCartDetail.resx">
+      <DependentUpon>202002280207338_ChangeFK_ProductVariationVsShoppingCartDetail.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

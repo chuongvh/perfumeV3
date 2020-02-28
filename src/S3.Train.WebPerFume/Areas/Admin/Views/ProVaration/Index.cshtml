@@ -1,0 +1,40 @@
+﻿@using S3.Train.WebPerFume.Areas.Admin.Models
+@model IEnumerable<ProductModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    @foreach (var item in Model)
+    {
+
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <img src="~/Content/img/product-men/@item.ProductImage" class="img-sm rounded-circle mr-3" alt="@item.ProductName" />
+                        <a href="#" class="text-black">@item.ProductName</a>
+                    </h4>
+                    <ul class="list-arrow">
+                        @foreach (var proVa in item.proVarationViewModels)
+                        {
+                        <li>
+                            <a href="#" class="text-black">@item.ProductName @proVa.Volume</a>
+                            @{
+                                if (proVa.Price == 0)
+                                {
+                                    <label class="badge badge-danger">Update</label>
+                                }
+                            }
+                        </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    }
+</div>
+
+
