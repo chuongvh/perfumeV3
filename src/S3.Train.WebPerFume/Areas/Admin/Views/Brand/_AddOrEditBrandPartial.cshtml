@@ -12,6 +12,7 @@
     {
         title = "Update";
         cssTiltle = "btn btn-gradient-success btn-fw";
+        Model.Summary = Html.Raw(HttpUtility.HtmlDecode(Model.Summary)).ToString();
     }
 }
 

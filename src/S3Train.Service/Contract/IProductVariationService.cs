@@ -9,5 +9,7 @@ namespace S3Train.Contract
 {
     public interface IProductVariationService : IGenenicServiceBase<ProductVariation>
     {
+        ProductVariation GetProductVariationByIdAndVolume(Guid id, string volume);
+        IList<ProductVariation> GetProductVariations(Guid ProductId);
     }
 }

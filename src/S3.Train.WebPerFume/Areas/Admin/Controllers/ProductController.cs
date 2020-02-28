@@ -1,4 +1,5 @@
 ﻿using S3.Train.WebPerFume.Areas.Admin.Models;
+using S3.Train.WebPerFume.CommonFunction;
 using S3Train.Contract;
 using S3Train.Domain;
 using System;
@@ -15,22 +16,24 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
         private readonly IProductService _productService;
         private readonly IBrandService _brandService;
         private readonly IVendorService _vendorService;
+        private readonly IProductVariationService _productVariationService;
        
 
         public ProductController() { }
 
-        public ProductController(IProductService productService, IBrandService brandService, IVendorService vendorService)
+        public ProductController(IProductService productService, IBrandService brandService, 
+            IVendorService vendorService, IProductVariationService productVariationService)
         {
             _productService = productService;
             _brandService = brandService;
             _vendorService = vendorService;
- 
+            _productVariationService = productVariationService;
         }
 
         // GET: Admin/Product
         public ActionResult Index()
         {
-            var model = GetProducts(_productService.SelectAll());
+            var model = GetProducts(_productService.SelectAll().OrderBy(x => x.Name).ToList());
             return View(model);
         }
 
@@ -57,8 +60,9 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
         {
             ProductViewModel model = new ProductViewModel();
 
-            model.DropDownBrand = DropDownList_Brand();
-            model.DropDownVendor = DropDownList_Vendor();
+            model.DropDownBrand = DropDownListDomain.DropDownList_Brand(_brandService.SelectAll());
+            model.DropDownVendor = DropDownListDomain.DropDownList_Vendor(_vendorService.SelectAll());
+            model.Volumes = DropDownListDomain.GetVolumeCheckBoxes();
 
             if (id.HasValue)
             {
@@ -90,7 +94,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
             try
             {
                 bool isNew = !id.HasValue;
-                string localFile = "~/Content/img/product-men";
+                string localFile = Server.MapPath("~/Content/img/product-men");
 
                 // isNew = true update UpdatedDate of product
                 // isNew = false get it by id
@@ -103,7 +107,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                 product.Brand_Id = model.Brand_Id;
                 product.Vendor_Id = model.Vendor_Id;
                 product.Description = model.Description;
-                product.ImagePath = UpFile(image, localFile);
+                product.ImagePath = _productService.UpFile(image, localFile);
                 product.IsActive = true;
 
                 if (isNew)
@@ -111,6 +115,13 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                     product.CreatedDate = DateTime.Now;
                     product.Id = Guid.NewGuid();
                     _productService.Insert(product);
+
+                    // Add ProductVariation if checked = true
+                    foreach(var proVa in model.Volumes)
+                    {
+                        if (proVa.Checked)
+                            AddProductVariation(product.Id, proVa.Volume);
+                    }
                 }
                 else
                 {
@@ -145,34 +156,6 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        /// <summary>
-        /// Drop Down List Brand
-        /// </summary>
-        /// <returns></returns>
-        public List<SelectListItem> DropDownList_Brand()
-        {
-            List<SelectListItem> items = new List<SelectListItem>();
-            foreach (var item in _brandService.SelectAll())
-            {
-                items.Add(new SelectListItem { Text = item.Name, Value = item.Id.ToString() });
-            }
-            return items;
-        }
-
-        /// <summary>
-        /// Drop Down List Vendor
-        /// </summary>
-        /// <returns></returns>
-        public List<SelectListItem> DropDownList_Vendor()
-        {
-            List<SelectListItem> items = new List<SelectListItem>();
-            foreach (var item in _vendorService.SelectAll())
-            {
-                items.Add(new SelectListItem { Text = item.Name, Value = item.Id.ToString() });
-            }
-            return items;
-        }
-
 
         /// <summary>
         /// Convert List Product to List ProductViewModel All Properties
@@ -187,7 +170,6 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                 Name = x.Name,
                 Brand = _brandService.GetById(x.Brand_Id),
                 Vendor = _vendorService.GetById(x.Vendor_Id),
-                
                 Description = x.Description,
                 ImagePath = x.ImagePath,
                 CreateDate = x.CreatedDate,
@@ -195,39 +177,26 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
             }).ToList();
         }
 
-        public IList<ProductViewModel> GetProduct_SummaryInfo(IList<Product> products)
-        {
-            return products.Select(x => new ProductViewModel
-            {
-                Id = x.Id,
-                Name = x.Name,
-                ImagePath = x.ImagePath,
-                CreateDate = x.CreatedDate,
-                IsActive = x.IsActive
-            }).ToList();
-        }
-
-
         /// <summary>
-        /// Upload file and save in folder
+        /// Add Product Variation With product Id and volume
         /// </summary>
-        /// <param name="a">choose file</param>
-        /// <param name="url">local save file </param>
-        /// <returns>file name</returns>
-        public string UpFile(HttpPostedFileBase a, string url)
+        /// <param name="product_Id">Product Id</param>
+        /// <param name="volume">Volume of product variation</param>
+        public void AddProductVariation(Guid product_Id, string volume)
         {
-            string fileName = "";
-            if (a != null && a.ContentLength > 0)
+            var item = new ProductVariation
             {
-                fileName = Path.GetFileName(a.FileName).ToString();
-                string path = Path.Combine(Server.MapPath(url), fileName);
-                a.SaveAs(path);
-                return fileName;
-            }
-            else
-            {
-                return fileName;
-            }
+                Id = Guid.NewGuid(),
+                Product_Id = product_Id,
+                Volume = volume,
+                Price = 0,
+                SKU = "Empty",
+                StockQuantity = 0,
+                CreatedDate = DateTime.Now,
+                IsActive = true
+            };
+
+            _productVariationService.Insert(item);
         }
     }
 }

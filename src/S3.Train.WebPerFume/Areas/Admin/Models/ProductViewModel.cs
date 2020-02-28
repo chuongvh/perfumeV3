@@ -12,6 +12,8 @@ namespace S3.Train.WebPerFume.Areas.Admin.Models
     {
         public Guid Id { get; set; }
 
+        public List<VolumeCheckBoxModel> Volumes { get; set; }
+
         [Display(Name="Vendor")]
         public Guid Vendor_Id { get; set; }
 
@@ -45,5 +47,12 @@ namespace S3.Train.WebPerFume.Areas.Admin.Models
 
         public virtual Vendor Vendor { get; set; }
         public virtual Brand Brand { get; set; }
+    }
+
+    public class VolumeCheckBoxModel
+    {
+        public int id { get; set; }
+        public string Volume { get; set; }
+        public bool Checked { get; set; }
     }
 }

@@ -232,5 +232,29 @@ namespace S3Train
                 return fileName;
             }
         }
+
+        public void ChangeStatus(T entity, bool status)
+        {
+            try
+            {
+                if (entity == null)
+                {
+                    throw new ArgumentNullException("entity");
+                }
+                entity.IsActive = status;
+                this.DbContext.SaveChanges();
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        errorMessage += string.Format("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                    }
+                }
+                throw new Exception(errorMessage, dbEx);
+            }
+        }
     }
 }
