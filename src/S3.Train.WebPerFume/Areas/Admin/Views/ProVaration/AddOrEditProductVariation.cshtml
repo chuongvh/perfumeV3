@@ -6,69 +6,125 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Product Variation</h4>
+        @{
+            if (Model.SKU == null)
+            {
+                <h4 class="card-description">Create New Product Variation</h4>
+            }
+            else
+            {
+                <h4 class="card-description">Update Product Variation</h4>
+            }
+        }
 
-@using (Html.BeginForm()) 
+        @using (Html.BeginForm("AddOrEditProductVariation", "ProVaration", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Product_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Product_Id, Model.DropDownProduct, "select", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Volume, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Volume, Model.DropDownVolume, "select", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SKU, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SKU, new { htmlAttributes = new { placeholder = "15", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SKU, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.StockQuantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.StockQuantity, new { htmlAttributes = new { placeholder = 1, @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.StockQuantity, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DiscountPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DiscountPrice, new { htmlAttributes = new { @class = "form-control" } })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" id="gallery-photo-add" name="imageList" class="btn" multiple>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="gallery rounded"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Submit" class="btn btn-gradient-primary btn-fw mr-2" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-gradient-secondary btn-fw" })
+        </div>
+    </div>
+</div>
+
+
+@section scripts
 {
-    @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Product_Id, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Product_Id, Model.DropDownProduct, "select", new { @class = "form-control" })
-        </div>
-    </div>
+    <script>
+        $(function () {
+            // Multiple images preview in browser
+            var imagesPreview = function (input, placeToInsertImagePreview) {
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.SKU, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SKU, new { htmlAttributes = new { placeholder="15", @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SKU, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                if (input.files) {
+                    var filesAmount = input.files.length;
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.StockQuantity, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.StockQuantity, new { htmlAttributes = new { placeholder = 1, @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.StockQuantity, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                    for (i = 0; i < filesAmount; i++) {
+                        var reader = new FileReader();
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                        reader.onload = function (event) {
+                            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                        }
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Volume, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Volume, Model.DropDownVolume, "select", new { @class = "form-control" })
-        </div>
-    </div>
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.DiscountPrice, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.DiscountPrice, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.DiscountPrice, "", new { @class = "text-danger" })
-        </div>
-    </div>
+            };
 
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
-    </div>
-</div>
+            $('#gallery-photo-add').on('change', function () {
+                imagesPreview(this, 'div.gallery');
+            });
+        });
+    </script>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

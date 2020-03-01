@@ -23,7 +23,11 @@
                             @{
                                 if (proVa.Price == 0)
                                 {
-                                    <label class="badge badge-danger">Update</label>
+                                    @Html.ActionLink("Update", "AddOrEditProductVariation", "ProVaration", new { id = proVa.Id}, new { @class = "badge badge-danger" })
+                                }
+                                else
+                                {
+                                    <label class="badge badge-success">Ok</label>
                                 }
                             }
                         </li>

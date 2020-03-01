@@ -18,5 +18,10 @@ namespace S3Train.Service
         {
             return this.EntityDbSet.FirstOrDefault(x => x.ProductVariation_Id == proVa);
         }
+
+        public IList<ProductImage> GetProductImageList(Guid proVa)
+        {
+            return this.EntityDbSet.Where(x => x.ProductVariation_Id == proVa).ToList();
+        }
     }
 }

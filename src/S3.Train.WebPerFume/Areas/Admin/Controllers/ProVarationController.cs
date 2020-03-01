@@ -36,10 +36,17 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
             return View(model);
         }
 
+        public ActionResult Detail(Guid id)
+        {
+            var model = GetProducts(_productService.SelectAll().OrderBy(p => p.Name).ToList());
+            return View(model);
+        }
+
+        #region Add or update Product Variation
         [HttpGet]
         public ActionResult AddOrEditProductVariation(Guid? id)
         {
-            ProVarationViewModel model = new ProVarationViewModel();
+            var model = new ProVarationViewModel();
 
             model.DropDownProduct = DropDownListDomain.DropDownList_Product(_productService.SelectAll());
             model.DropDownVolume = DropDownListDomain.DropDownList_Volume();
@@ -49,6 +56,9 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                 var productVariation = _productVariationService.GetById(id.Value);
 
                 model = ConvertDomainToModel.ConvertModelFromDomainToProVa(productVariation);
+
+                model.DropDownProduct = DropDownListDomain.DropDownList_Product(_productService.SelectAll());
+                model.DropDownVolume = DropDownListDomain.DropDownList_Volume();
 
                 model.Image = _productImageService.GetProductImage(model.Id) == null ? null :
                                         ConvertDomainToModel.GetProductImage(_productImageService.GetProductImage(model.Id));
@@ -67,7 +77,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult AddOrEditProductVariation(Guid? id, ProVarationViewModel model, HttpPostedFileBase image)
+        public ActionResult AddOrEditProductVariation(Guid? id, ProVarationViewModel model, IEnumerable<HttpPostedFileBase> imageList)
         {
             try
             {
@@ -96,10 +106,18 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                     productVariation.CreatedDate = DateTime.Now;
                     productVariation.Id = Guid.NewGuid();
                     _productVariationService.Insert(productVariation);
+
+                    // add many image for product variation
+                    AddImageOnProductImageTable(imageList, productVariation.Id);
                 }
                 else
                 {
                     _productVariationService.Update(productVariation);
+                    
+                    // Delete list image of product variation   
+                    DeleteListImageOnProductImageTable(imageList,productVariation.Id);
+                    // add many image for product variation
+                    AddImageOnProductImageTable(imageList, productVariation.Id);
                 }
             }
             catch (Exception ex)
@@ -108,6 +126,33 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
+
+        #region Delete Product Variation
+        /// <summary>
+        /// Delete Product Variation
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public PartialViewResult DeleteProductVariation(Guid id)
+        {
+            var productVariation = _productVariationService.GetById(id);
+            var model = new ProVarationViewModel
+            {
+                SKU = productVariation.SKU
+            };
+            return PartialView("~/Areas/Admin/Views/Product/_DeleteProduct.cshtml", model);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteProductVariation(ProVarationViewModel model)
+        {
+            var product = _productVariationService.GetById(model.Id);
+            _productVariationService.Delete(product);
+            return RedirectToAction("Index");
+        }
+        #endregion
 
         /// <summary>
         /// get product variation have image with image id
@@ -148,6 +193,51 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                 proVarationViewModels = GetProductVariations(
                     _productVariationService.GetProductVariations(x.Id)).ToList(),
             }).ToList();
+        }
+
+        /// <summary>
+        /// Add many image in product image table
+        /// </summary>
+        /// <param name="httpPostedFileBases">list image post</param>
+        /// <param name="ProVaId">Product variation id</param>
+        public void AddImageOnProductImageTable(IEnumerable<HttpPostedFileBase> httpPostedFileBases, Guid ProVaId)
+        {
+            string local = Server.MapPath("~/Content/img/product-men");
+            foreach (var file in httpPostedFileBases)
+            {
+                var model = new ProductImage
+                {
+                    Id = Guid.NewGuid(),
+                    ImagePath = _productImageService.UpFile(file,local),
+                    ProductVariation_Id = ProVaId,
+                    CreatedDate = DateTime.Now,
+                    IsActive = true
+                };
+                _productImageService.Insert(model);
+            }
+        }
+
+        public void DeleteListImageOnProductImageTable(IEnumerable<HttpPostedFileBase> httpPostedFileBases, Guid ProVaId)
+        {
+            string local = Server.MapPath("~/Content/img/product-men");
+            foreach(var proImage in _productImageService.GetProductImageList(ProVaId))
+            {
+                _productImageService.Delete(proImage);
+            }
+        }
+
+        /// <summary>
+        /// Update many image in product image table
+        /// </summary>
+        /// <param name="httpPostedFileBases">list image post</param>
+        /// <param name="ProVaId">Product variation id</param>
+        public void UpdateImageOnProductImageTable(IEnumerable<HttpPostedFileBase> httpPostedFileBases, Guid ProImage)
+        {
+            string local = Server.MapPath("~/Content/img/product-men");
+            foreach (var file in httpPostedFileBases)
+            {
+                
+            }
         }
 
     }

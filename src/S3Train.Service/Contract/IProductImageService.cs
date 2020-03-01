@@ -10,5 +10,6 @@ namespace S3Train.Contract
     public interface IProductImageService : IGenenicServiceBase<ProductImage>
     {
         ProductImage GetProductImage(Guid proVa);
+        IList<ProductImage> GetProductImageList(Guid proVa);
     }
 }
