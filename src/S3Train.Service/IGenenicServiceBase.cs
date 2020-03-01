@@ -66,5 +66,7 @@ namespace S3Train
 
         string UpFile(HttpPostedFileBase a, string url);
 
+        void UpManyFile(IEnumerable<HttpPostedFileBase> a, string url);
+
     }
 }

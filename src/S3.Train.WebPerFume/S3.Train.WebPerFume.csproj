@@ -1097,6 +1097,7 @@
     <Content Include="Areas\Admin\Views\ProductAdvertisement\_DeleteProductAdvertisement.cshtml" />
     <Content Include="Areas\Admin\Views\ProVaration\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ProVaration\AddOrEditProductVariation.cshtml" />
+    <Content Include="Areas\Admin\Views\ProVaration\DeleteProductVariationPartial.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

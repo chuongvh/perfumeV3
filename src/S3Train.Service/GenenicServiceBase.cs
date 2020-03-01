@@ -256,5 +256,19 @@ namespace S3Train
                 throw new Exception(errorMessage, dbEx);
             }
         }
+
+        public void UpManyFile(IEnumerable<HttpPostedFileBase> a, string url)
+        {
+            foreach(var file in a)
+            {
+                string fileName = "";
+                if (file != null && file.ContentLength > 0)
+                {
+                    fileName = Path.GetFileName(file.FileName).ToString();
+                    string path = Path.Combine(url, fileName);
+                    file.SaveAs(path);
+                }
+            }
+        }
     }
 }
