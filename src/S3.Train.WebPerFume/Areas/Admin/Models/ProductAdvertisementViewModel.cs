@@ -33,7 +33,9 @@ namespace S3.Train.WebPerFume.Areas.Admin.Models
         [Display(Name = "Image")]
         [Required]
         public string ImagePath { get; set; }
-        public ProductAdvertisementType AdType { get; set; }
         
+        public ProductAdvertisementType productadvertisementType { get; set; }
+        public List<SelectListItem> DropDownProductAd { get; set; }
+
     }
 }

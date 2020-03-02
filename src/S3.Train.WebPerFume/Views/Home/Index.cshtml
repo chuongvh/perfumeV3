@@ -1,4 +1,6 @@
-﻿
+﻿@using S3.Train.WebPerFume.Models
+@model HomeViewModel
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
@@ -50,7 +52,7 @@
             <div class="col-lg-4">
                 <div class="single-banner">
 
-                    <img src="~/Content/img/product-men/man-ava1.jpg" alt="">
+                    <img src="~/Content/img/banner/@Model.SquareMen.ImagePath" alt="">
                     <div class="inner-text">
                         <h4>Men’s</h4>
                     </div>
@@ -58,7 +60,7 @@
             </div>
             <div class="col-lg-4">
                 <div class="single-banner">
-                    <img src="~/Content/img/product-girls/girl_3.jpeg" alt="">
+                    <img src="~/Content/img/banner/@Model.Squarewomen.ImagePath" alt="">
                     <div class="inner-text">
                         <h4>Women’s</h4>
                     </div>
@@ -66,7 +68,7 @@
             </div>
             <div class="col-lg-4">
                 <div class="single-banner">
-                    <img src="~/Content/img/product-girls/nu_3.jpg" alt="">
+                    <img src="~/Content/img/banner/@Model.SquareUnisex.ImagePath" alt="">
                     <div class="inner-text">
                         <h4>Unisex</h4>
                     </div>
@@ -81,9 +83,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3">
-                <div class="product-large set-bg" data-setbg="/Content/img/product-girls/woman-girl.jpg">
+                <div class="product-large set-bg" data-setbg="/Content/img/banner/@Model.BannerWomen.Image">
                     <h2>Women’s</h2>
-                    <a href="#">Discover More</a>
+                    <a href="@Model.BannerWomen.Link">Discover More</a>
                 </div>
             </div>
             <div class="col-lg-8 offset-lg-1">
@@ -193,7 +195,7 @@
 </section>
 <!-- Women Banner Section End -->
 <!-- Deal Of The Week Section Begin-->
-<section class="deal-of-week set-bg spad" data-setbg="/Content/img/banner/5.jpeg">
+<section class="deal-of-week set-bg spad" data-setbg="/Content/img/banner/@Model.BannerMain.Image">
     <div class="container">
         <div class="col-lg-6 text-center">
             <div class="section-title">
@@ -238,7 +240,7 @@
                 <div class="filter-control">
                     <ul>
                         <li class="active">Clothings</li>
-                        <li>HandBag</li>
+                        <li class="">HandBag</li>
                         <li>Shoes</li>
                         <li>Accessories</li>
                     </ul>
@@ -337,9 +339,9 @@
                 </div>
             </div>
             <div class="col-lg-3 offset-lg-1">
-                <div class="product-large set-bg m-large" data-setbg="/Content/img/product-men/man-issey.jpg">
+                <div class="product-large set-bg m-large" data-setbg="/Content/img/banner/@Model.BannerMen.Image">
                     <h2>Men’s</h2>
-                    <a href="#">Discover More</a>
+                    <a href="@Model.BannerMen.Link">Discover More</a>
                 </div>
             </div>
         </div>

@@ -9,5 +9,8 @@ namespace S3Train.Contract
 {
     public interface IBannerService : IGenenicServiceBase<Banner>
     {
+        Banner GetMainBanner();
+        Banner GetMenBanner();
+        Banner GetWomenBanner();
     }
 }
