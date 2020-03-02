@@ -10,6 +10,6 @@ namespace S3Train.Contract
         IList<Product> GetProductsByVendorId(Guid vendor_Id);
         List<Product> GetProductsByCategoryId(Guid category_Id);
 
-        public void InsertProductOnCategory(Category category, Product product)
+        void InsertProductOnCategory(Category category, Product product);
     }
 }

@@ -107,12 +107,18 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                 category.ParentId = model.ParentId;
                 category.IsActive = true;
 
+                var listProductId = model.SelectedProducts;
+
                 if (isNew)
                 {
                     category.CreatedDate = DateTime.Now;
                     category.Id = Guid.NewGuid();
                     _categoryService.Insert(category);
-                    _productService.InsertProductOnCategory(model.ProductCategoriesModels, category);
+                    foreach(var pro in listProductId)
+                    {
+                        var product = _productService.GetById(Guid.Parse(pro));
+                        _productService.InsertProductOnCategory(category, product);
+                    }
                 }
                 else
                 {
@@ -171,5 +177,6 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                 ProductImage = x.ImagePath
             }).OrderBy(p => p.ProductName).ToList();
         }
+
     }
 }

@@ -16,7 +16,6 @@ namespace S3.Train.WebPerFume.Areas.Admin.Models
         public DateTime? UpdatedDate { get; set; }
         public bool IsActive { get; set; }
 
-        public string Products { get; set; }
         public IList<ProductCategoriesModel> ProductCategoriesModels { get; set; }
 
         public List<string> SelectedProducts { get; set; }
