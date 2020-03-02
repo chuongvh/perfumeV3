@@ -23,8 +23,6 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
         {
             _orderService = orderService;
             _shoppingcartService = shoppingcartService;
-
-
         }
 
         // GET: Admin/Order
@@ -43,7 +41,6 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                 DeliveryAddress = order.DeliveryAddress,
                 DeliveryName = order.DeliveryName,
                 DeliveryPhone = order.DeliveryPhone,
-
                 OrderDate = order.OrderDate,
                 ShoppingCart = _shoppingcartService.GetById(order.ShoppingCart_Id),
                 CreateDate = order.CreatedDate,
@@ -56,8 +53,6 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
         public ActionResult AddOrEditOrder(Guid? id)
         {
             OrderViewModel model = new OrderViewModel();
-
-
 
             if (id.HasValue)
             {
@@ -89,7 +84,6 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
             {
                 bool isNew = !id.HasValue;
 
-
                 // isNew = true update UpdatedDate of product
                 // isNew = false get it by id
                 var order = isNew ? new Order
@@ -101,9 +95,9 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                 order.DeliveryName = model.DeliveryName;
                 order.DeliveryAddress = model.DeliveryAddress;
                 order.DeliveryPhone = model.DeliveryPhone;
-                order.OrderDate = model.OrderDate;
+                order.OrderDate = DateTime.Now;
                 order.ShoppingCart_Id = model.ShoppingCart_Id;
-                order.IsActive = true;
+                order.IsActive = false;
 
                 if (isNew)
                 {
@@ -162,7 +156,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                 ShoppingCart_Id = x.ShoppingCart_Id,
                 CreateDate = x.CreatedDate,
                 IsActive = x.IsActive
-            }).ToList();
+            }).OrderByDescending(p => p.OrderDate).ToList();
         }
 
 

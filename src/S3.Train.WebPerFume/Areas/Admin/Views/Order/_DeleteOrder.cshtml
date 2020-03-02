@@ -4,16 +4,16 @@
 @using (Html.BeginForm("DeleteProduct", "Product", FormMethod.Post))
 {
     @Html.HiddenFor(m => m.Id)
-    <button type="button" class="btn btn-gradient-danger btn-fw" data-toggle="modal" data-target="#exampleModal">
+    <button type="button" class="btn btn-gradient-danger btn-fw" data-toggle="modal" data-target="#exampleModal@(Model.Id)">
         Delete
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal@(Model.Id)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel@(Model.Id)">Delte Order</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

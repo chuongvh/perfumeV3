@@ -10,9 +10,6 @@
 
 <div class="card card-body display">
     <h2 class="card-text">Orders</h2>
-    <div>
-        @Html.ActionLink("New", "AddOrder", "Order", new { @class = "btn btn-gradient-success" })
-    </div>
     <hr />
     <table id="myTable" class="table table-hover">
         <thead>
@@ -27,17 +24,7 @@
                     @Html.DisplayNameFor(model => model.DeliveryName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DeliveryAddress)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DeliveryPhone)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.OrderDate)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.CreateDate)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.IsActive)
@@ -52,25 +39,31 @@
                     <td>
                         @stt
                     </td>
-                  
                     <td>
-                        @Html.DisplayFor(modelItem => item.CreateDate)
+                        @Html.DisplayFor(modelItem => item.ShoppingCart_Id)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeliveryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderDate)
                     </td>
                     <td>
                         @{
                             if (item.IsActive)
                             {
-                                <label class="badge badge-success">On</label>
+                                <label class="badge badge-success">Delivered</label>
                             }
                             else
                             {
-                                <label class="badge badge-danger">Off</label>
+                                <label class="badge badge-danger">delivery</label>
                             }
                             stt = stt + 1;
                         }
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "AddOrder", "Order", new { id = item.Id }, new { @class = "btn btn-gradient-info btn-fw" })
+                        @Html.ActionLink("Detail", "DetailProduct", "Order", new { id = item.Id }, new { @class = "btn btn-gradient-secondary btn-fw" })
                         <br />
                         @Html.Partial("_DeleteOrder", item)
                     </td>
@@ -83,9 +76,9 @@
 
 @section scripts
 {
-    <script>
+    @*<script>
         $(document).ready(function () {
             $('#myTable').DataTable();
         });
-    </script>
+    </script>*@
 }
