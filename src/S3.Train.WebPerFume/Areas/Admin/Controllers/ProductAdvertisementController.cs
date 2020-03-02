@@ -1,4 +1,5 @@
 ﻿using S3.Train.WebPerFume.Areas.Admin.Models;
+using S3.Train.WebPerFume.CommonFunction;
 using S3Train.Contract;
 using S3Train.Domain;
 using System;
@@ -54,7 +55,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
         {
             ProductAdvertisementViewModel model = new ProductAdvertisementViewModel();
 
-            
+            model.DropDownProductAd = DropDownListDomain.DropDownList_ProductADType();
 
             if (id.HasValue)
             {
@@ -86,7 +87,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
             try
             {
                 bool isNew = !id.HasValue;
-                string localFile = "~/Content/img/productadvertisement";
+                string localFile = "~/Content/img/banner";
 
                 // isNew = true update UpdatedDate of product
                 // isNew = false get it by id
@@ -101,7 +102,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                 productadvertisement.Description = model.Description;
                 productadvertisement.ImagePath = UpFile(image, localFile);
                 productadvertisement.IsActive = true;
-
+                productadvertisement.AdType = model.productadvertisementType;
                 if (isNew)
                 {
                     productadvertisement.CreatedDate = DateTime.Now;

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using S3Train.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace S3.Train.WebPerFume.Areas.Admin.Models
 {
@@ -23,6 +25,10 @@ namespace S3.Train.WebPerFume.Areas.Admin.Models
 
         [Display(Name = "Active")]
         public bool IsActive { get; set; }
+
+        public BannerType bannerType { get; set; }
+
+        public List<SelectListItem> DropDownBannerType { get; set; }
 
     }
 }

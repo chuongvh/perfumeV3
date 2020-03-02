@@ -9,7 +9,7 @@
 
 <div class="card card-body">
     @{
-        if (Model.Id == null)
+        if (Model.EventUrl == null)
         {
             <h2 class="card-title">Create New ProductAdvertisement</h2>
         }
@@ -49,7 +49,12 @@
             @Html.ValidationMessageFor(model => model.EventUrlCaption, "", new { @class = "text-danger" })
         </div>
     </div>
-
+    <div class="form-group">
+        @Html.LabelFor(model => model.productadvertisementType, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.productadvertisementType, Model.DropDownProductAd, "select", new { @class = "form-control" })
+        </div>
+    </div>
     <div class="form-group">
         @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">

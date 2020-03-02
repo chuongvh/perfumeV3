@@ -1,4 +1,5 @@
 ﻿using S3.Train.WebPerFume.Areas.Admin.Models;
+using S3.Train.WebPerFume.CommonFunction;
 using S3Train.Contract;
 using S3Train.Domain;
 using System;
@@ -36,7 +37,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
         {
             BannerViewModel model = new BannerViewModel();
 
-          
+            model.DropDownBannerType = DropDownListDomain.DropDownList_BannerType();
 
             if (id.HasValue)
             {
@@ -44,6 +45,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                 model.Id = banner.Id;
                 model.Image = banner.Image;
                 model.Link = banner.Link;
+                
                 model.CreateDate = banner.CreatedDate;
                 model.IsActive = banner.IsActive;
                 return View(model);
@@ -76,7 +78,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                 banner.Image = UpFile(image, localFile);
                 banner.Link = model.Link;
                 banner.IsActive = true;
-
+                banner.AdType = model.bannerType;
                 if (isNew)
                 {
                     banner.CreatedDate = DateTime.Now;
