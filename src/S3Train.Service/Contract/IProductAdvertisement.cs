@@ -9,5 +9,9 @@ namespace S3Train.Contract
 {
     public interface IProductAdvertisement : IGenenicServiceBase<ProductAdvertisement>
     {
+
+        ProductAdvertisement GetWomenSquareBanner();
+        ProductAdvertisement GetMenSquareBanner();
+        ProductAdvertisement GetUnisexSquareBanner();
     }
 }

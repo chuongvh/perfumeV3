@@ -72,6 +72,23 @@ namespace S3.Train.WebPerFume.CommonFunction
             return items;
         }
 
+        public static List<SelectListItem> DropDownList_BannerType()
+        {
+           return Enum.GetValues(typeof(BannerType)).Cast<BannerType>().Select(v => new SelectListItem
+            {
+                Text = v.ToString(),
+                Value = ((int)v).ToString()
+            }).ToList();
+        }
+        public static List<SelectListItem> DropDownList_ProductADType()
+        {
+            return Enum.GetValues(typeof(ProductAdvertisementType)).Cast<ProductAdvertisementType>().Select(v => new SelectListItem
+            {
+                Text = v.ToString(),
+                Value = ((int)v).ToString()
+            }).ToList();
+        }
+
         /// <summary>
         /// Drop Down List Volume
         /// </summary>

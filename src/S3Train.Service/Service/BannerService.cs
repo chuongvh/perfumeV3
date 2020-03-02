@@ -13,5 +13,20 @@ namespace S3Train.Service
         public BannerService(ApplicationDbContext dbContext) : base(dbContext)
         {
         }
+
+        public Banner GetMainBanner()
+        {
+            return this.EntityDbSet.FirstOrDefault(b => b.AdType == BannerType.MainBanner && b.IsActive);
+        }
+
+        public Banner GetMenBanner()
+        {
+            return this.EntityDbSet.FirstOrDefault(b => b.AdType == BannerType.MenBanner && b.IsActive);
+        }
+
+        public Banner GetWomenBanner()
+        {
+            return this.EntityDbSet.FirstOrDefault(b => b.AdType == BannerType.WomenBanner && b.IsActive);
+        }
     }
 }
