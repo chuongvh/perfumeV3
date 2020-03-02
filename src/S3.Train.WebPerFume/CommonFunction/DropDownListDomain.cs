@@ -72,6 +72,22 @@ namespace S3.Train.WebPerFume.CommonFunction
             return items;
         }
 
+
+        /// <summary>
+        /// Drop Down List Category
+        /// </summary>
+        /// <param name="categories"></param>
+        /// <returns>Category Select List Item </returns>
+        public static List<SelectListItem> DropDownList_Categoty(IList<Category> categories)
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+            foreach (var item in categories.OrderBy(p => p.Name).ToList())
+            {
+                items.Add(new SelectListItem { Text = item.Name, Value = item.Id.ToString() });
+            }
+            return items;
+        }
+
         /// <summary>
         /// Drop Down List Volume
         /// </summary>

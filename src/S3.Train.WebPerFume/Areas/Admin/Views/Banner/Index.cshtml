@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    int stt = 1;
 }
 
 <div class="card card-body display">
@@ -14,6 +15,9 @@
     <table id="myTable" class="table table-hover">
         <thead>
             <tr>
+                <th>
+                    #
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Image)
                 </th>
@@ -33,38 +37,33 @@
         {
             <tbody>
                 <tr>
-                    <td class="py-1">
+                    <td>@stt</td>
+                    <td class="py-1 align-middle">
                         <img src="~/Content/img/banner/@item.Image" class="img-" alt="@item.Link" />
                     </td>
-                    <td>
-                        @item.CreateDate
+                    <td class="align-middle">
+                        <a href="@item.Link" class="text-black">@item.Link</a>
                     </td>
-                    <td>
+                    <td class="align-middle">
+                        @Html.DisplayFor(modelItem => item.CreateDate)
+                    </td>
+                    <td class="align-middle">
                         @{
                             if (item.IsActive)
                             {
-                                <div class="form-check form-check-success">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input" name="ExampleRadio2" id="ExampleRadio2" checked="">
-                                        <i class="input-helper"></i>
-                                    </label>
-                                </div>
+                                <label class="badge badge-success">On</label>
                             }
                             else
                             {
-                                <div class="form-check form-check-danger">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input" name="ExampleRadio2" id="ExampleRadio2" checked="">
-                                        <i class="input-helper"></i>
-                                    </label>
-                                </div>
+                                <label class="badge badge-danger">Off</label>
                             }
-
+                            stt += 1;
                         }
                     </td>
                     <td>
+                        @Html.ActionLink("Edit", "AddOrEditBanner", "Banner", new { id = item.Id }, new { @class = "btn btn-gradient-info btn-fw" })
+                        <br />
                         @Html.Partial("_DeleteBanner", item)
-                        @Html.ActionLink("Edit", "AddOrEditBanner", "Banner", new { @class = "btn btn-gradient-success" }, new { id = item.Id })
                     </td>
                 </tr>
             </tbody>
@@ -75,9 +74,9 @@
 
 @section scripts
 {
-    <script>
+    @*<script>
         $(document).ready(function () {
             $('#myTable').DataTable();
         });
-    </script>
+    </script>*@
 }
