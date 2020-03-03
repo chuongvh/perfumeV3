@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html lang="zxx">
-
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Fashi Template">
@@ -22,6 +21,7 @@
     <link rel="stylesheet" href="~/Content/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="~/Content/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="~/Content/style.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/LoginModal.css" type="text/css"/>
     <!-- Css Styles -->
     <!--Styles.Render("~/Content/css")-->
 </head>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="ht-right">
-                    <a href="#" class="login-panel"><i class="fa fa-user"></i>Login</a>
+                    @Html.Partial("~/Views/Shared/_LoginModelPartial.cshtml", null)
                     <div class="lan-selector">
                         <select class="language_drop" name="countries" id="countries" style="width:300px;">
                             <option value='yt' data-image="/Content/img/flag/flag-1.jpg" data-imagecss="flag yt"
@@ -104,8 +104,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="si-pic">
-
-                                                        <img src="~/Content/img/select-product-1.jpg" />
+                                                        <img src="~/Content/img/p-chanel/babrielle1.jpg" />
                                                     </td>
                                                     <td class="si-text">
                                                         <div class="product-selected">
@@ -119,8 +118,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="si-pic">
-
-                                                        <img src="~/Content/img/select-product-2.jpg" />
+                                                        <img src="~/Content/img/p-chanel/babrielle2.jpg" />
                                                     </td>
                                                     <td class="si-text">
                                                         <div class="product-selected">
@@ -309,7 +307,7 @@
                         </div>
                         <div class="payment-pic">
 
-                            <img src="~/Content/img/payment-method.png" />
+                            <img src="~/Content/img/p-burberry/burberry.jpg" />
                         </div>
                     </div>
                 </div>
@@ -330,6 +328,9 @@
     <script src="~/Scripts/main.js"></script>
     <!-- Styles.Render("~/bundles/js") -->
 
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 
 </html>
