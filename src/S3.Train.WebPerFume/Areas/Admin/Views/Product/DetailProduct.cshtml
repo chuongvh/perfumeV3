@@ -1,13 +1,13 @@
-﻿@model S3.Train.WebPerFume.Areas.Admin.Models.BrandViewModel
+﻿@model S3.Train.WebPerFume.Areas.Admin.Models.ProductViewModel
 
 @{
-    ViewBag.Title = "DetailBrand";
+    ViewBag.Title = "DetailProduct";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <div class="card">
     <div class="card-body">
-        <div class="h3 card-header">Detail @Model.Name Brand</div>
+        <div class="h3 card-header">Detail @Model.Name Product</div>
         <br />
         <div class="container">
             <div class="row row-cols-1 h-100">
@@ -18,7 +18,7 @@
             <br />
             <div class="row row-cols-1 h-50">
                 <div class="col col-lg">
-                    <strong> Logo:</strong> <img src="~/Content/img/logocarousel/@Model.Logo" class="img-lg img-thumbnail" />
+                    <strong> Image:</strong> <img src="~/Content/img/product-men/@Model.ImagePath" class="img-lg img-thumbnail" />
                 </div>
             </div>
             <br />
@@ -28,13 +28,13 @@
                     @{
                         if (Model.IsActive)
                         {
-                            <a href="@Url.Action("ChangeStatusBrand","Brand", new { brand_Id= Model.Id, status = !Model.IsActive})">
+                            <a href="@Url.Action("ChangeStatusProduct","Product", new { product_Id= Model.Id, status = !Model.IsActive})">
                                 <label class="badge badge-success">On</label>
                             </a>
                         }
                         else
                         {
-                            <a href="@Url.Action("ChangeStatusBrand","Brand", new { brand_Id= Model.Id, status = !Model.IsActive})">
+                            <a href="@Url.Action("ChangeStatusProduct","Product", new { product_Id= Model.Id, status = !Model.IsActive})">
                                 <label class="badge badge-danger">Off</label>
                             </a>
                         }
@@ -48,19 +48,14 @@
                 </div>
             </div>
             <br />
-            <div class="row row-cols-1 h-50">
-                <div class="col col-lg">
-                    <strong> Update Date:</strong> @Model.UpdateDate
-                </div>
-            </div>
+            
             <br />
             <div class="row row-cols-1 h-50">
                 <div class="col col-lg">
-                    <strong>   Summary:</strong> @Html.Raw(HttpUtility.HtmlDecode(Model.Summary))
+                    <strong>   Description:</strong> @Html.Raw(HttpUtility.HtmlDecode(Model.Description))
                 </div>
             </div>
             <br />
-            @Html.Partial("~/Areas/Admin/Views/Product/_ProductSmall_Info.cshtml", Model.Products)
         </div>
         <div class="row">
             <div class="col-md-auto">
@@ -75,5 +70,5 @@
         </div>
 
     </div>
-    
+
 </div>
