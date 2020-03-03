@@ -1,13 +1,14 @@
-﻿@model S3.Train.WebPerFume.Areas.Admin.Models.BrandViewModel
+﻿@using S3.Train.WebPerFume.Areas.Admin.Models
+@model CategoryViewModel
 
 @{
-    ViewBag.Title = "DetailBrand";
+    ViewBag.Title = "DetailCategory";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <div class="card">
     <div class="card-body">
-        <div class="h3 card-header">Detail @Model.Name Brand</div>
+        <div class="h3">Detail Category </div>
         <br />
         <div class="container">
             <div class="row row-cols-1 h-100">
@@ -16,11 +17,6 @@
                 </div>
             </div>
             <br />
-            <div class="row row-cols-1 h-50">
-                <div class="col col-lg">
-                    Logo: <img src="~/Content/img/logocarousel/@Model.Logo" class="img-lg img-thumbnail"/>
-                </div>
-            </div>
             <br />
             <div class="row row-cols-1 h-50">
                 <div class="col col-lg">
@@ -28,13 +24,13 @@
                     @{
                         if (Model.IsActive)
                         {
-                            <a href="@Url.Action("ChangeStatusBrand","Brand", new { brand_Id= Model.Id, status = !Model.IsActive})">
+                            <a href="@Url.Action("ChangeStatusCategory","Category", new { category_Id= Model.Id, status = !Model.IsActive})">
                                 <label class="badge badge-success">On</label>
                             </a>
                         }
                         else
                         {
-                            <a href="@Url.Action("ChangeStatusBrand","Brand", new { brand_Id= Model.Id, status = !Model.IsActive})">
+                            <a href="@Url.Action("ChangeStatusCategory","Category", new { category_Id= Model.Id, status = !Model.IsActive})">
                                 <label class="badge badge-danger">Off</label>
                             </a>
                         }
@@ -44,13 +40,13 @@
             <br />
             <div class="row row-cols-1 h-50">
                 <div class="col col-lg">
-                    Create Date: @Model.CreateDate
+                    Create Date: @Html.DisplayFor(modelItem => Model.CreatedDate)
                 </div>
             </div>
             <br />
             <div class="row row-cols-1 h-50">
                 <div class="col col-lg">
-                    Update Date: @Model.UpdateDate
+                    Update Date:  @Html.DisplayFor(modelItem => Model.UpdatedDate)
                 </div>
             </div>
             <br />
@@ -60,15 +56,22 @@
                 </div>
             </div>
             <br />
-            @Html.Partial("~/Areas/Admin/Views/Product/_ProductSmall_Info.cshtml", Model.Products)
+            Product List
+            @Html.Partial("~/Areas/Admin/Views/Product/_ProductSmall_Info.cshtml", Model.ProductCategoriesModels)
         </div>
-        <div>
-            @Html.Partial("_AddOrEditBrandPartial", Model)
-            <br />
-            @Html.Partial("_DeleteBrandPartial", Model)
-            <br />
-            @Html.ActionLink("Back To List","Index","Brand", new { @class= "btn btn-gradient-light btn-fw" })
+        <br />
+        <div class="row">
+            <div class="col-md-auto">
+                @Html.ActionLink("Update", "AddOrEditCategory", "Category", new { id = Model.Id }, new { @class = "btn btn-gradient-info btn-fw" })
+            </div>
+            <div class="col-md-auto">
+                @Html.Partial("_DeleteCategoryPartial", Model)
+            </div>
+            <div class="col-md-auto">
+                @Html.ActionLink("Back To List", "Index", "Category", new { @class = "btn btn-gradient-light btn-fw" })
+            </div>
         </div>
-     </div>
-    
+    </div>
+
 </div>
+

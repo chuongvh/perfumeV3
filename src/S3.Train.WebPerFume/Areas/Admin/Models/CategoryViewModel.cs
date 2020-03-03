@@ -12,13 +12,17 @@ namespace S3.Train.WebPerFume.Areas.Admin.Models
         public Guid Id { get; set; }
         [Display(Name = "Parent Categories")]
         public Guid? ParentId { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime CreatedDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime? UpdatedDate { get; set; }
+
         public bool IsActive { get; set; }
 
-        public IList<ProductCategoriesModel> ProductCategoriesModels { get; set; }
+        public IList<ProductViewModel> ProductCategoriesModels { get; set; }
 
-        public List<string> SelectedProducts { get; set; }
+        public List<Guid> SelectedProducts { get; set; }
 
         [Display(Name = "Product")]
         public List<SelectListItem> DropDownProduct { get; set; }
@@ -29,12 +33,5 @@ namespace S3.Train.WebPerFume.Areas.Admin.Models
         public string Name { get; set; }
         public string Summary { get; set; }
 
-    }
-
-    public class ProductCategoriesModel
-    {
-        public Guid Id { get; set; }
-        public string ProductName { get; set; }
-        public string ProductImage { get; set; }
     }
 }

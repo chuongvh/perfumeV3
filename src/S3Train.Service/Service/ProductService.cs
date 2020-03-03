@@ -34,14 +34,42 @@ namespace S3Train.Service
         /// </summary>
         /// <param name="category">category</param>
         /// <param name="product">Product</param>
-        public void InsertProductOnCategory(Category category, Product product)
+        public void InsertProductOnCategory(Guid category_Id, Guid product_Id)
         {
-            var pro = this.EntityDbSet.FirstOrDefault(p => p.Id == product.Id);
-            if (pro == null)
+            var category = DbContext.Categories.FirstOrDefault(c => c.Id == category_Id);
+            var product = this.EntityDbSet.FirstOrDefault(p => p.Id == product_Id);
+            var checkPro = category.Products.FirstOrDefault(p=>p.Id == product.Id);
+
+            if(category != null && product != null)
             {
-                Insert(pro);
+                if (checkPro != null)
+                {
+                    category.Products.Remove(checkPro);
+                    category.Products.Add(product);
+                }
+                else
+                {
+                    category.Products.Add(product);
+                }
             }
-            pro.Categories.Add(category);
+            
+            
+            this.DbContext.SaveChanges();
+        }
+
+        public void DeleteProductOnCategory(Guid category_Id, Guid product_Id)
+        {
+            var category = DbContext.Categories.FirstOrDefault(c => c.Id == category_Id);
+            var product = this.EntityDbSet.FirstOrDefault(p => p.Id == product_Id);
+            var checkPro = category.Products.FirstOrDefault(p => p.Id == product.Id);
+
+            if (category != null && product != null)
+            {
+                if (checkPro != null)
+                {
+                    category.Products.Remove(checkPro);
+                }
+            }
             this.DbContext.SaveChanges();
         }
     }
