@@ -45,8 +45,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                 Id = product.Id,
                 Name = product.Name,
                 Brand = _brandService.GetById(product.Brand_Id),
-                Vendor = _vendorService.GetById(product.Vendor_Id),
-               
+                Vendor = _vendorService.GetById(product.Vendor_Id), 
                 Description = product.Description,
                 ImagePath = product.ImagePath,
                 CreateDate = product.CreatedDate,
@@ -198,5 +197,12 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
 
             _productVariationService.Insert(item);
         }
+        public ActionResult ChangeStatusProduct(Guid product_Id, bool status)
+        {
+            var product = _productService.GetById(product_Id);
+            _productService.ChangeStatus(product, status);
+            return RedirectToAction("DetailProduct", new { id = product_Id });
+        }
+
     }
 }

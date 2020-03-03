@@ -8,7 +8,62 @@
 }
 
 <script src="~/Content/ckeditor/ckeditor.js"></script>
+<section>
+    <div class="card card-body">
+        <div class="h4">
+            Vendors
+        </div>
+        <div>
+            @Html.Partial("_AddOrEditVendorPartial", new VendorViewModel())
 
+        </div>
+    </div>
+</section>
+<br />
+<section>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg">
+                                <h4 class="card-title">
+                                 
+                                    <a href="@Url.Action( "DetailVendor", "Vendor", new { id = item.Id })" class="text-black">@item.Name </a>
+
+                                </h4>
+                            </div>
+                            <div class="col-sm-auto">
+
+                            </div>
+                        </div>
+                        <hr>
+                        <ul class="list-ticked">
+                            @foreach (var product in item.Products)
+                            {
+                                <li class="row">
+                                    <dib class="col-lg">
+                                        <img src="~/Content/img/product-men/@product.ImagePath" class="img-sm rounded-circle mr-3" alt="@product.Name" />
+                                        <a href="# " class="text-black align-middle">@product.Name</a>
+                                    </dib>
+                                    <div class="col-sm-auto">
+                                        @Html.Partial("_DeleteVendorPartial", item)
+                                    </div>
+                                </li>
+                                <br />
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+        }
+    </div>
+@*</section>
 <div class="card">
     <div class="card-body">
         <div class="h2">Vendors</div>
@@ -36,4 +91,4 @@
 
         }
     </div>
-</div>
+</div>*@

@@ -13,7 +13,7 @@
         <div class="container">
             <div class="row row-cols-1 h-100">
                 <div class="col col-lg">
-                    Name: @Model.Name
+                    <strong>Name:</strong> @Model.Name
                 </div>
             </div>
             <br />
@@ -62,13 +62,13 @@
         <br />
         <div class="row">
             <div class="col-md-auto">
-                @Html.ActionLink("Update", "AddOrEditCategory", "Category", new { id = Model.Id }, new { @class = "btn btn-gradient-info btn-fw" })
+                @Html.ActionLink("Back To List", "Index", "Category", new { @class = "btn btn btn-primary btn-fw" })
+            </div>
+            <div class="col-md-auto">
+                @Html.ActionLink("Update", "AddOrEditCategory", "Category", new { id = Model.Id }, new { @class = "btn btn btn-info btn-fw" })
             </div>
             <div class="col-md-auto">
                 @Html.Partial("_DeleteCategoryPartial", Model)
-            </div>
-            <div class="col-md-auto">
-                @Html.ActionLink("Back To List", "Index", "Category", new { @class = "btn btn-gradient-light btn-fw" })
             </div>
         </div>
     </div>

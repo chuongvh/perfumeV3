@@ -47,6 +47,7 @@ namespace S3.Train.WebPerFume.Areas.Admin.Models
 
         public virtual Vendor Vendor { get; set; }
         public virtual Brand Brand { get; set; }
+        public DateTime CreatedDate { get; internal set; }
     }
 
     public class VolumeCheckBoxModel
