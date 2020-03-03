@@ -1,39 +1,33 @@
-﻿@*@using S3.Train.WebPerFume.Areas.Admin.Models
+﻿@using S3.Train.WebPerFume.Areas.Admin.Models
 @model IEnumerable<CategoryViewModel>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
-    int stt = 1;
 }
+<div class="row">
+    @foreach (var item in Model)
+    {
 
-<script src="~/Content/ckeditor/ckeditor.js"></script>
-
-<div class="card">
-    <div class="card-body">
-        <div class="h2">Categories</div>
-        <div>
-            @Html.Partial("_AddOrEditCategoryPartial", new CategoryViewModel())
-        </div>
-        <hr />
-        @foreach (var category in Model)
-        {
-            <div class="container">
-                <div class="row row-cols-1 w-75">
-                    <div class="col col-lg">
-                        <div class="h3">
-                            @stt .  @Html.ActionLink(category.Name, "DetailCategory", "Category", new { id = category.Id }, new { @class = "text-black" })  @{ stt += 1; }
-                        </div>
-                    </div>
-                    <div class="col col-lg">
-                        @Html.Partial("_DeleteBrandPartial", category)
-                    </div>
+        <div class="col-md-4 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#" class="text-black">@item.Name</a>
+                    </h4>
+                    <ul class="list-arrow">
+                        @foreach (var product in item.ProductCategoriesModels)
+                        {
+                        <li>
+                            <img src="~/Content/img/product-men/@product.ProductImage" class="img-sm rounded-circle mr-3" alt="@product.ProductName" />
+                            <a href="#" class="text-black">@product.ProductName</a>
+                        </li>
+                        }
+                    </ul>
                 </div>
-
-                @Html.Partial("~/Areas/Admin/Views/Product/_ProductSmall_Info.cshtml", category.Products)
             </div>
-            <div class="h-25"><hr /></div>
+        </div>
 
-        }
-    </div>
-</div>*@
+
+    }
+</div>
