@@ -12,9 +12,7 @@ namespace S3.Train.WebPerFume
                         "~/Scripts/jquery-{version}.js",
                         "~/scripts/datatables/jquery.datatables.js",
                         "~/scripts/datatables/datatables.boostrap.js",
-                        "~/scripts/bootbox.js",
-                        "~/Scripts/respond.js"
-                        ));
+                        "~/scripts/bootbox.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
