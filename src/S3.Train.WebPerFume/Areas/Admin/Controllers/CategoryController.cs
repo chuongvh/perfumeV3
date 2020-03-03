@@ -50,12 +50,13 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                 CreatedDate = category.CreatedDate,
                 IsActive = category.IsActive,
                 Summary = category.Summary,
-
+                ProductCategoriesModels = GetProducts(_productService.GetProductsByCategoryId(category.Id)),
                 UpdatedDate = category.UpdatedDate,
             };
             return View(model);
         }
 
+        #region Add or update category
         [HttpGet]
         public ActionResult AddOrEditCategory(Guid? id)
         {
@@ -114,15 +115,16 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
                     category.CreatedDate = DateTime.Now;
                     category.Id = Guid.NewGuid();
                     _categoryService.Insert(category);
-                    foreach(var pro in listProductId)
-                    {
-                        var product = _productService.GetById(Guid.Parse(pro));
-                        _productService.InsertProductOnCategory(category, product);
-                    }
+
+                    // insert product in category
+                    InsertProductCategoryByListProId(listProductId,category.Id);
                 }
                 else
                 {
                     _categoryService.Update(category);
+
+                    // insert product in category
+                    InsertProductCategoryByListProId(listProductId, category.Id);
                 }
             }
             catch (Exception ex)
@@ -131,9 +133,9 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
 
-
-
+        #region Delete Category
         [HttpGet]
         public PartialViewResult DeleteCategory(Guid id)
         {
@@ -152,6 +154,33 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
             _categoryService.Delete(category);
             return RedirectToAction("Index");
         }
+        #endregion
+
+        /// <summary>
+        /// Delete a Product on category
+        /// </summary>
+        /// <param name="product_Id">product</param>
+        /// <param name="category_Id">category</param>
+        /// <returns>View(Index)</returns>
+        public ActionResult DeleteProductOnCategory(Guid product_Id, Guid category_Id)
+        {
+            _productService.DeleteProductOnCategory(category_Id, product_Id);
+            return RedirectToAction("Index");
+        }
+
+
+        /// <summary>
+        /// change status category
+        /// </summary>
+        /// <param name="category_Id"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public ActionResult ChangeStatusCategory(Guid category_Id, bool status)
+        {
+            var category = _categoryService.GetById(category_Id);
+            _categoryService.ChangeStatus(category,status);
+            return RedirectToAction("DetailCategory", new { id = category_Id});
+        }
 
         private IList<CategoryViewModel> GetCategorys(IList<Category> categories)
         {
@@ -168,14 +197,25 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
             }).OrderBy(p => p.Name).ToList();
         }
 
-        private IList<ProductCategoriesModel> GetProducts(IList<Product> products)
+        private IList<ProductViewModel> GetProducts(IList<Product> products)
         {
-            return products.Select(x => new ProductCategoriesModel
+            return products.Select(x => new ProductViewModel
             {
                 Id = x.Id,
-                ProductName = x.Name,
-                ProductImage = x.ImagePath
-            }).OrderBy(p => p.ProductName).ToList();
+                Name = x.Name,
+                ImagePath = x.ImagePath
+            }).OrderBy(p => p.Name).ToList();
+        }
+
+        private void InsertProductCategoryByListProId(List<Guid> listProId, Guid category_Id)
+        {
+            if (listProId != null)
+            {
+                foreach (var pro in listProId)
+                {
+                    _productService.InsertProductOnCategory(category_Id, pro);
+                }
+            }
         }
 
     }

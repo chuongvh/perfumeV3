@@ -145,6 +145,20 @@ namespace S3.Train.WebPerFume.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+
+        /// <summary>
+        /// change status brand
+        /// </summary>
+        /// <param name="brand_Id"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public ActionResult ChangeStatusBrand(Guid brand_Id, bool status)
+        {
+            var brand = _brandService.GetById(brand_Id);
+            _brandService.ChangeStatus(brand, status);
+            return RedirectToAction("DetailBrand", new { id = brand_Id });
+        }
+
         private IList<BrandViewModel> GetBrands(IList<Brand> brands)
         {
             return brands.Select(x => new BrandViewModel
