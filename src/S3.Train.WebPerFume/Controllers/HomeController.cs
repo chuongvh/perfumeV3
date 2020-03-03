@@ -13,16 +13,24 @@ namespace S3.Train.WebPerFume.Controllers
     {
         private readonly IBannerService _bannerService;
         private readonly IProductAdvertisement _productAdvertisement;
+        private readonly IProductVariationService  _productVariationService;
+        private readonly IProductService  _productService;
+        private readonly IProductImageService _productImageService;
 
         public HomeController()
         {
 
         }
 
-        public HomeController(IBannerService bannerService,IProductAdvertisement productAdvertisement)
+        public HomeController(IBannerService bannerService,IProductAdvertisement productAdvertisement,
+            IProductVariationService productVariationService, IProductService productService,
+            IProductImageService productImageService)
         {
             _bannerService = bannerService;
             _productAdvertisement = productAdvertisement;
+            _productVariationService = productVariationService;
+            _productService = productService;
+            _productImageService = productImageService;
         }
 
         public ActionResult Index()
@@ -35,10 +43,22 @@ namespace S3.Train.WebPerFume.Controllers
             model.SquareMen = GetProAd(_productAdvertisement.GetMenSquareBanner());
             model.Squarewomen = GetProAd(_productAdvertisement.GetWomenSquareBanner());
             model.SquareUnisex = GetProAd(_productAdvertisement.GetUnisexSquareBanner());
+            //model.productsModels = GetProducts(_productVariationService.SelectAll());
+
             return View(model);
         }
+        private IList<ProductsModel> GetProducts(IList<ProductVariation> products)
+        {
+            return products.Select(x => new ProductsModel
+            {
+               Id= x.Id,
+               Name = _productService.GetById(x.Product_Id).Name,
+               Price=x.Price,
+               DiscountPrice=x.DiscountPrice,
+               ImagePath=_productImageService.GetProductImage(x.Id).ImagePath,
+            }).ToList();
+        }
 
-    
 
         private IList<BannerModel> GetBanners(IList<BannerModel> banners)
         {
