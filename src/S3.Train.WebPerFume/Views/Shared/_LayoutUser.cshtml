@@ -330,6 +330,16 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#test").click(function () {
+                //collect the user data
+                alert("s")
+            })
+        })
+    </script>
+
     @RenderSection("scripts", required: false)
 </body>
 
