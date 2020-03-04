@@ -236,24 +236,27 @@
                     Id = Guid.NewGuid(),
                     CreatedDate = DateTime.Now,
                     IsActive = true,
-                    Image = "Banner 1",
-                    Link ="banner1"
+                    Image = "banner1",
+                    Link ="banner1",
+                    AdType = BannerType.MainBanner
                 },
             new Banner
                 {
                     Id = Guid.NewGuid(),
                     CreatedDate = DateTime.Now,
                     IsActive = true,
-                    Image = "Banner 2",
-                    Link ="banner2"
+                    Image = "banner2",
+                    Link ="banner2",
+                    AdType = BannerType.MenBanner
                 },
             new Banner
                 {
                     Id = Guid.NewGuid(),
                     CreatedDate = DateTime.Now,
                     IsActive = true,
-                    Image = "Banner 3",
-                    Link ="banner3"
+                    Image = "banner3",
+                    Link ="banner3",
+                    AdType = BannerType.WomenBanner
                 },
             };
             banners.ForEach(x => context.Banners.AddOrUpdate(c => c.Image, x));
@@ -279,12 +282,25 @@
                         CreatedDate = DateTime.Now,
                         IsActive = true,
 
+                        EventUrl = "controller/action/11",
+                        EventUrlCaption = string.Empty,
+                        ImagePath = "http://placehold.it/900x350",
+                        Title = "Adver One One",
+                        Description = "Lorem ipsum",
+                        AdType = ProductAdvertisementType.SliderBanner
+                    },
+                    new ProductAdvertisement
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedDate = DateTime.Now,
+                        IsActive = true,
+
                         EventUrl = "controller/action/2",
                         EventUrlCaption = string.Empty,
                         ImagePath = "http://placehold.it/900x350",
                         Title = "Adver Two",
                         Description = "Lorem ipsum",
-                        AdType = ProductAdvertisementType.SliderBanner
+                        AdType = ProductAdvertisementType.WomenSquareBanner
                     },
                     new ProductAdvertisement
                     {
@@ -297,7 +313,72 @@
                         ImagePath = "http://placehold.it/900x350",
                         Title = "Adver Three",
                         Description = "Lorem ipsum",
-                        AdType = ProductAdvertisementType.SliderBanner
+                        AdType = ProductAdvertisementType.MenSquareBanner
+                    },
+                    new ProductAdvertisement
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedDate = DateTime.Now,
+                        IsActive = true,
+
+                        EventUrl = "controller/action/4",
+                        EventUrlCaption = string.Empty,
+                        ImagePath = "http://placehold.it/900x350",
+                        Title = "Adver Four",
+                        Description = "Lorem ipsum",
+                        AdType = ProductAdvertisementType.UnisexSquareBanner
+                    },
+                    new ProductAdvertisement
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedDate = DateTime.Now,
+                        IsActive = true,
+
+                        EventUrl = "controller/action/5",
+                        EventUrlCaption = string.Empty,
+                        ImagePath = "http://placehold.it/900x350",
+                        Title = "Adver Five",
+                        Description = "Lorem ipsum",
+                        AdType = ProductAdvertisementType.MidVertRectangleBanner
+                    },
+                    new ProductAdvertisement
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedDate = DateTime.Now,
+                        IsActive = true,
+
+                        EventUrl = "controller/action/6",
+                        EventUrlCaption = string.Empty,
+                        ImagePath = "http://placehold.it/900x350",
+                        Title = "Adver Six",
+                        Description = "Lorem ipsum",
+                        AdType = ProductAdvertisementType.MidHorRectangleBanner
+                    },
+                    new ProductAdvertisement
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedDate = DateTime.Now,
+                        IsActive = true,
+
+                        EventUrl = "controller/action/7",
+                        EventUrlCaption = string.Empty,
+                        ImagePath = "http://placehold.it/900x350",
+                        Title = "Adver Seven",
+                        Description = "Lorem ipsum",
+                        AdType = ProductAdvertisementType.LgVertRectangleBanner
+                    },
+                    new ProductAdvertisement
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedDate = DateTime.Now,
+                        IsActive = true,
+
+                        EventUrl = "controller/action/8",
+                        EventUrlCaption = string.Empty,
+                        ImagePath = "http://placehold.it/900x350",
+                        Title = "Adver Eight",
+                        Description = "Lorem ipsum",
+                        AdType = ProductAdvertisementType.LgHorRectangleBanner
                     },
 
                 };
